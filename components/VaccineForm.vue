@@ -2,12 +2,12 @@
   <div class="flex justify-center">
     <bg-card class="w-2/5 bgcard mt-10">
       <form class="flex flex-col opacity-100 p-3">
-        <h1 class="Heading text-center font-bold text-xl p-2 ">
+        <h1 class="Heading text-center font-bold text-xl p-2">
           เพิ่มประเภทวัคซีน
         </h1>
 
         <!-- ชื่อวัคซีน -->
-        <div class="flex flex-row p-1"> 
+        <div class="flex flex-row p-1">
           <label for="vaccine-name" class="vacname">ชื่อวัคซีน</label>
           <!-- v-model="product.productName" -->
           <input
@@ -15,8 +15,7 @@
             type="text"
             name="vaccine-name"
             placeholder="ชื่อวัคซีน"
-            class="text bg-white opacity-100 placeholder-white  hover:shadow-lg	"
-
+            class="text bg-white opacity-100 placeholder-white hover:shadow-lg"
           />
         </div>
 
@@ -29,7 +28,7 @@
             type="text"
             name="vaccine-desc"
             placeholder="รายละเอียดวัคซีน"
-            class="textarea placeholder-white  hover:shadow-lg	" 
+            class="textarea placeholder-white hover:shadow-lg"
           />
 
           <!-- Old IMAGE Form -->
@@ -55,20 +54,85 @@
         <div>
           <div class="flex flex-col p-3 pl-0">
             <span id="colors-heading">สถานที่ฉีดวัคซีน </span>
-            <div class="for-nextLine flex flex-row">
+            <div class="for-nextLine grid grid-cols-2">
               <!--  v-for="color in tempColors"
             v-bind:key="color.colorID" -->
-              <label class="container">
+              <label for="SCG-Bangsue" class="bg-red-300" >
                 <!-- :checked="colorIsChecked(color)"
               @click="colorHandler(color.colorID)"
               value="{{color.colorName.toLowerCase()}}" 
                id="{{color.colorName.toLowerCase()}} -->
 
-                <input type="checkbox" name="vaccinate-place" />
+                <input
+                  id="SCG-Bangsue"
+                  type="checkbox"
+                  name="vaccinate-place"
+                  value="SCG-Bangsue"
+                />
+                SCG บางซื่อ
                 <!-- <span
               class="checkmark"
               :class="color.colorName.toLowerCase()"
             ></span> -->
+              </label>
+              <label for="True-Digital-Park">
+                <input
+                  id="True-Digital-Park"
+                  type="checkbox"
+                  name="vaccinate-place"
+                  value="True-Digital-Park"
+                />
+                True Digital Park
+              </label>
+
+              <label for="Central-World">
+                <input
+                  id="Central-World"
+                  type="checkbox"
+                  name="vaccinate-place"
+                  value="Central-World"
+                />
+                เซ็นทรัลเวิลด์
+              </label>
+
+              <label for="PTT-Station">
+                <input
+                  id="PTT-Station"
+                  type="checkbox"
+                  name="vaccinate-place"
+                  value="PTT-Station"
+                />
+                PTT Station พระราม 2
+              </label>
+
+              <label for="Central-Pinklao">
+                <input
+                  id="Central-Pinklao"
+                  type="checkbox"
+                  name="vaccinate-place"
+                  value="Central-Pinklao"
+                />
+                เซ็นทรัลปิ่นเกล้า
+              </label>
+
+              <label for="The-Mall-BKP">
+                <input
+                  id="The-Mall-BKP"
+                  type="checkbox"
+                  name="vaccinate-place"
+                  value="The-Mall-BKP"
+                />
+                เดอะมอลล์บางกะปิ
+              </label>
+
+              <label for="The-Mall-Bangkae">
+                <input
+                  id="The-Mall-Bangkae"
+                  type="checkbox"
+                  name="vaccinate-place"
+                  value="The-Mall-Bangkae"
+                />
+                เดอะมอลล์ บางแค
               </label>
             </div>
           </div>
@@ -76,12 +140,8 @@
 
         <!-- SUBMIT -->
         <div class="flex justify-end">
-          <input
-            type="submit"
-            value="บันทึก"
-            class="save-button"
-          />
-           <!-- @click="backToHomePage" -->
+          <input type="submit" value="บันทึก" class="save-button" />
+          <!-- @click="backToHomePage" -->
         </div>
       </form>
     </bg-card>
@@ -97,54 +157,76 @@ export default {
 
 <style scoped>
 /* บัคอส หาไม่ได้ */
-h1{
-  color: #106F8C;
+h1 {
+  color: #106f8c;
 }
 
 /* .bgcard{
   opacity: 75%;
 } */
-
-.save-button{
+.save-button {
   padding: 3%;
-  background-color: #10AFB9;
+  background-color: #10afb9;
   border-radius: 0.5rem;
   color: aliceblue;
-
+}
+.save-button:hover {
+  color: black;
+  cursor:pointer;
 }
 @media (min-width: 320px) {
-  .bgcard{
+  .bgcard {
     width: 85%;
   }
-  .text{
+  .text {
     border-width: 1px;
-  	border-radius: 0.5rem;
-  	/* border-color: #106F8C; */
+    border-radius: 0.5rem;
+    /* border-color: #106F8C; */
     margin-left: 6%;
     padding: 3%;
     width: 50vw;
     background-color: lightsteelblue;
   }
-  .textarea{
+  .textarea {
     border-width: 1px;
-  	border-radius: 0.5rem;
-  	/* border-color: #106F8C; */
+    border-radius: 0.5rem;
+    /* border-color: #106F8C; */
     padding: 3%;
     width: 50vw;
     height: 30vw;
     margin-left: 1%;
     background-color: lightsteelblue;
   }
-
 }
-
 @media (min-width: 768px) {
-  .bgcard{
+  .bgcard {
     width: 70%;
+    height: auto;
   }
-   .textarea{
-     margin-left: 1%;
-    height: 13vw;
+  .text {
+    padding: 2%;
+  }
+  .textarea {
+    padding: 2%;
+    margin-left: 1%;
+    height: 12vw;
+  }
+}
+@media (min-width: 1024px) {
+  .save-button {
+    padding: 1% 2% 1% 2%;
+  }
+  .bgcard {
+    width: 50%;
+    height: auto;
+  }
+  .text {
+    padding: 2%;
+  }
+  .textarea {
+    padding: 2%;
+    margin-left: 1%;
+    height: 12vw;
   }
 }
 </style>
