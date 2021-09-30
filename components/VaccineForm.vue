@@ -166,13 +166,14 @@
               <img src="../static/image-upload.jpg" id="upload-pic" class="hover:shadow-2xl"/>
             </label>
             <input
-              @change="imageHandler"
+              
               type="file"
               id="vaccine-img"
               name="vaccine-img"
               accept="image/*"
               
             />
+            <!-- @change="imageHandler" -->
           </center>
         </div>
 
@@ -210,31 +211,23 @@ export default {
 
   methods: {
     validateForm() {
-      this.productValidate = false
-      if (this.product.productName === '') {
-        this.productValidate = true
-        alert('Please enter PRODUCT NAME.')
+      this.vaccineValidate = false
+      if (this.vaccine.vaccineName === '') {
+        this.vaccineValidate = true
+        alert('กรุณากรอกชื่อวัคซีน')
       }
-      if (this.product.productReleaseDate === '') {
-        this.productValidate = true
-        alert('Please enter MANUFACTURER DATE.')
+      if (this.vaccine.vaccineDetail === '') {
+        this.vaccineValidate = true
+        alert('กรุณากรอกรายละเอียดวัคซีน')
       }
-      if (this.product.productDetail === '') {
-        this.productValidate = true
-        alert('Please enter PRODUCT DESCRIPTION.')
+      if (this.vaccineImageFile === null) {
+        this.vaccineValidate = true
+        alert('กรุณาอัปโหลดไฟล์ภาพวัคซีน')
       }
-      if (this.product.productBrand === '') {
-        this.productValidate = true
-        alert('Please enter PRODUCT BRAND.')
-      }
-      if (this.productImageFile === null) {
-        this.productValidate = true
-        alert('Please Upload an IMAGE.')
-      }
-      if (this.product.colors.length === 0) {
-        this.productValidate = true
-        alert('Please enter PRODUCT COLOR.')
-      }
+      // if (this.vaccine.places.length === 0) {
+      //   this.vaccineValidate = true
+      //   alert('กรุณาเลือกสถานที่ให้บริการวัคซีน')
+      // }
       if (this.productValidate === false) {
         this.submitForm()
       }
