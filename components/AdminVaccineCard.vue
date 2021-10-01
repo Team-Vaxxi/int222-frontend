@@ -1,5 +1,5 @@
 <template>
-  <bg-card class="p-5"> Eiei from AdminVacineCard Component </bg-card>
+  <bg-card class="p-5"> <slot> </slot></bg-card>
 </template>
 
 <script>

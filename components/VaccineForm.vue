@@ -14,7 +14,6 @@
           <label for="vaccine-name" class="vacname font-semibold"
             >ชื่อวัคซีน</label
           >
-          <!-- v-model="product.productName" -->
           <input
             id="vaccine-name"
             v-model="vaccine.vaccineName"
@@ -29,6 +28,7 @@
               placeholder-transparent
               w-full
             "
+            required
           />
         </div>
 
@@ -45,6 +45,31 @@
             name="vaccine-desc"
             placeholder="รายละเอียดวัคซีน"
             class="textarea hover:shadow-xl w-full placeholder-transparent"
+            required
+          />
+        </div>
+
+        <!-- ราคาวัคซีน -->
+        <div class="flex flex-col md:flex-row p-1">
+          <label for="vaccine-name" class="vacname font-semibold"
+            >ราคาวัคซีน</label
+          >
+          <input
+            id="vaccine-price"
+            v-model="vaccine.vaccinePrice"
+            type="number"
+            name="vaccine-price"
+            placeholder="ราคา"
+            min="1"
+            class="
+              text
+              bg-white
+              opacity-100
+              hover:shadow-xl
+              placeholder-transparent
+              w-full
+            "
+            required
           />
         </div>
 
@@ -228,17 +253,16 @@ export default {
       //   this.vaccineValidate = true
       //   alert('กรุณาเลือกสถานที่ให้บริการวัคซีน')
       // }
-      if (this.productValidate === false) {
+      if (this.vaccineValidate === false) {
         this.submitForm()
       }
     },
-  },
+  
+  submitForm() {
+    console.log("Test Submit");
+      }
+  }
 }
-
-// Checkbox --- Eslint Error
-// $(document).on("change", "input[type='checkbox']", function () {
-// 	$(this).parent()[this.checked ? "addClass" : "removeClass"]("checked");
-// });
 </script>
 
 <style scoped>
@@ -325,6 +349,11 @@ h1 {
     padding: 2%;
     width: 70%;
   }
+  #vaccine-price {
+    margin-left: 14%;
+    padding: 2%;
+    width: 70%;
+  }
   .textarea {
     width: 70%;
     padding: 2%;
@@ -344,6 +373,11 @@ h1 {
     padding: 2%;
     margin-left: 13%;
   }
+   #vaccine-price {
+    margin-left: 10%;
+    padding: 2%;
+    width: 70%;
+  }
   .textarea {
     padding: 2%;
     margin-left: 1%;
@@ -358,6 +392,11 @@ h1 {
   .text {
     padding: 1%;
     margin-left: 14%;
+  }
+   #vaccine-price {
+    margin-left: 12%;
+    padding: 1%;
+    width: 70%;
   }
   .textarea {
     padding: 1%;
