@@ -9,7 +9,7 @@
           เพิ่มประเภทวัคซีน
         </h1>
 
-        <!-- ชื่อวัคซีน -->
+        <!-- name -->
         <div class="flex flex-col md:flex-row p-1">
           <label for="vaccine-name" class="vacname font-semibold"
             >ชื่อวัคซีน</label
@@ -28,11 +28,10 @@
               placeholder-transparent
               w-full
             "
-            required
           />
         </div>
 
-        <!-- รายละเอียดวัคซีน-->
+        <!-- Description-->
         <div class="flex flex-col md:flex-row p-1 pt-3">
           <label for="vaccine-desc" class="font-semibold"
             >รายละเอียดวัคซีน</label
@@ -45,11 +44,10 @@
             name="vaccine-desc"
             placeholder="รายละเอียดวัคซีน"
             class="textarea hover:shadow-xl w-full placeholder-transparent"
-            required
           />
         </div>
 
-        <!-- ราคาวัคซีน -->
+        <!-- Price -->
         <div class="flex flex-col md:flex-row p-1">
           <label for="vaccine-name" class="vacname font-semibold"
             >ราคาวัคซีน</label
@@ -69,7 +67,6 @@
               placeholder-transparent
               w-full
             "
-            required
           />
         </div>
         <!-- Location -->
