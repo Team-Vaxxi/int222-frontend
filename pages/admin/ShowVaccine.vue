@@ -23,7 +23,7 @@
         "
       >
         <admin-vaccine-card
-          v-for="vaccine in vaccineList.data"
+          v-for="vaccine in vaccineList"
           :key="vaccine.idVaccine"
           class="w-72 md:h-60 md:w-auto shadow-2xl"
         >
@@ -82,7 +82,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import AdminVaccineCard from '../../components/AdminVaccineCard.vue'
 import BgCard from '../../components/BgCard.vue'
 
@@ -90,22 +89,19 @@ export default {
   components: { BgCard, AdminVaccineCard },
   data() {
     return {
-      backendURL: 'http://23.98.67.216/dev-backend/vaccines',
       imageURL: 'http://23.98.67.216/dev-backend/vaccines/images',
       vaccineList: [],
       imageList: [],
     }
   },
   methods: {
-    getImage(imgname) {
-      console.log(`${this.imageURL}/${imgname}`)
-      return `${this.imageURL}/${imgname}`
+    getImage(imageName) {
+      return `${this.imageURL}/${imageName}`
     },
   },
   async created() {
-    this.vaccineList = await axios.get(this.backendURL)
-    console.log(this.vaccineList.data[1])
-    console.log('Test')
+    console.log('-- created -- ');
+    this.vaccineList = await this.$axios.$get('/vaccines')
   },
 }
 </script>

@@ -72,114 +72,25 @@
             required
           />
         </div>
-
-        <!-- สถานที่ฉีด -->
+        <!-- Location -->
         <div>
           <div class="flex flex-col p-3 pl-0">
             <span id="colors-heading" class="p-1 font-semibold"
               >สถานที่ฉีดวัคซีน
             </span>
-            <div class="grid-place md:grid grid-cols-2">
-              <!--  v-for="color in tempColors"
-            v-bind:key="color.colorID" -->
+            <div v-for="location in tempLocations" v-bind:key="location.idLocation" class="grid-place md:grid grid-cols-2" >
               <div class="w-auto choice-container">
-                <input
-                  id="SCG-Bangsue"
+                 <input
+                  :id="location.name.toLowerCase()"
                   type="checkbox"
-                  name="vaccinate-place"
-                  value="SCG-Bangsue"
+                  name="locations"
+                  :value="location.name.toLowerCase()"
                   class="check-with-label"
                 />
                 <label for="SCG-Bangsue" class="label-checkbox"
-                  >SCG บางซื่อ</label
+                  >{{ location.name }}</label
                 >
-              </div>
-              <!-- :checked="colorIsChecked(color)"
-              @click="colorHandler(color.colorID)"
-              value="{{color.colorName.toLowerCase()}}" 
-               id="{{color.colorName.toLowerCase()}} -->
-
-              <!-- <span
-              class="checkmark"
-              :class="color.colorName.toLowerCase()"
-            ></span> -->
-              <div class="choice-container">
-                <input
-                  id="True-Digital-Park"
-                  type="checkbox"
-                  name="vaccinate-place"
-                  value="True-Digital-Park"
-                  class="check-with-label"
-                />
-                <label for="True-Digital-Park" class="label-checkbox">
-                  True Digital Park
-                </label>
-              </div>
-
-              <div class="choice-container">
-                <input
-                  id="Central-World"
-                  type="checkbox"
-                  name="vaccinate-place"
-                  value="Central-World"
-                  class="check-with-label"
-                />
-                <label for="Central-World" class="label-checkbox">
-                  เซ็นทรัลเวิลด์
-                </label>
-              </div>
-
-              <div class="choice-container">
-                <input
-                  id="PTT-Station"
-                  type="checkbox"
-                  name="vaccinate-place"
-                  value="PTT-Station"
-                  class="check-with-label"
-                />
-                <label for="PTT-Station" class="label-checkbox">
-                  PTT Station พระราม 2
-                </label>
-              </div>
-
-              <div class="choice-container">
-                <input
-                  id="Central-Pinklao"
-                  type="checkbox"
-                  name="vaccinate-place"
-                  value="Central-Pinklao"
-                  class="check-with-label"
-                />
-                <label for="Central-Pinklao" class="label-checkbox">
-                  เซ็นทรัลปิ่นเกล้า
-                </label>
-              </div>
-
-              <div class="choice-container">
-                <input
-                  id="The-Mall-BKP"
-                  type="checkbox"
-                  name="vaccinate-place"
-                  value="The-Mall-BKP"
-                  class="check-with-label"
-                />
-                <label for="The-Mall-BKP" class="label-checkbox">
-                  เดอะมอลล์บางกะปิ
-                </label>
-              </div>
-
-              <div class="choice-container">
-                <input
-                  id="The-Mall-Bangkae"
-                  type="checkbox"
-                  name="vaccinate-place"
-                  value="The-Mall-Bangkae"
-                  class="check-with-label"
-                />
-                <label for="The-Mall-Bangkae" class="label-checkbox">
-                  เดอะมอลล์ บางแค
-                </label>
-              </div>
+                </div>
             </div>
           </div>
         </div>
@@ -213,7 +124,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 import BgCard from './BgCard.vue'
 export default {
   components: { BgCard },
@@ -224,10 +134,12 @@ export default {
 
   data() {
     return {
-      backendURL: 'http://23.98.67.216/backend/vaccines',
+      backendURL: 'http://23.98.67.216/dev-backend/',
       vaccineValidate: false,
       lastVaccineProductId: null,
-      tempPlaces: [],
+
+      tempLocations: [],
+
       vaccinetImageFile: null,
       currentImage: null,
       vaccine: Object,
@@ -261,6 +173,12 @@ export default {
   submitForm() {
     console.log("Test Submit");
       }
+  },
+
+  async created () {
+
+    this.tempLocations = await this.$axios.$get(`/locations`)
+    console.log(this.tempLocations);
   }
 }
 </script>
