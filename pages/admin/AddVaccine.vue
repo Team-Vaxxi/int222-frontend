@@ -10,9 +10,9 @@ export default {
       addingVaccine: {
         name: "",
         description: "",
-        price: "",
+        price: 0,
         image: "",
-        lcoation: []
+        location: []
       }
     }
   },  

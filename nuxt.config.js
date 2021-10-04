@@ -36,6 +36,8 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    // env 
+    '@nuxtjs/dotenv'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -48,7 +50,7 @@ export default {
   axios: {
     // created env.
     // `http://${...}/`
-    baseURL: `http://bedev.vaxxi.pw/`
+    baseURL: `http://${process.env.BACKEND_URL}/`
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
