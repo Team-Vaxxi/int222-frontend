@@ -36,6 +36,8 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    // env 
+    '@nuxtjs/dotenv'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -46,7 +48,9 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://23.98.67.216/dev-backend'
+    // created env.
+    // `http://${...}/`
+    baseURL: `http://${process.env.BACKEND_URL}/`
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

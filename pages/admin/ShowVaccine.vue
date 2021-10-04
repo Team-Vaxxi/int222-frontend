@@ -89,7 +89,7 @@ export default {
   components: { BgCard, AdminVaccineCard },
   data() {
     return {
-      imageURL: 'http://23.98.67.216/dev-backend/vaccines/images',
+      imageURL: `http://${process.env.BACKEND_URL}/vaccines/images`,
       vaccineList: [],
       imageList: [],
     }

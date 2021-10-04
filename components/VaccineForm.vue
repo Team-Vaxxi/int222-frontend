@@ -16,7 +16,7 @@
           >
           <input
             id="vaccine-name"
-            v-model="vaccine.vaccineName"
+            v-model="vaccine.name"
             type="text"
             name="vaccine-name"
             placeholder="ชื่อวัคซีน"
@@ -39,14 +39,14 @@
           <!-- v-model="product.productDetail" -->
           <textarea
             id="vaccine-desc"
-            v-model="vaccine.vaccineDetail"
+            v-model="vaccine.description"
             type="text"
             name="vaccine-desc"
             placeholder="รายละเอียดวัคซีน"
             class="textarea hover:shadow-xl w-full placeholder-transparent"
           />
         </div>
-
+        
         <!-- Price -->
         <div class="flex flex-col md:flex-row p-1">
           <label for="vaccine-name" class="vacname font-semibold"
@@ -54,11 +54,10 @@
           >
           <input
             id="vaccine-price"
-            v-model="vaccine.vaccinePrice"
-            type="number"
+            v-model="vaccine.price"
+            type="double"
             name="vaccine-price"
             placeholder="ราคา"
-            min="1"
             class="
               text
               bg-white
@@ -67,6 +66,7 @@
               placeholder-transparent
               w-full
             "
+            required
           />
         </div>
         <!-- Location -->
@@ -75,36 +75,45 @@
             <span id="colors-heading" class="p-1 font-semibold"
               >สถานที่ฉีดวัคซีน
             </span>
-            <div v-for="location in tempLocations" v-bind:key="location.idLocation" class="grid-place md:grid grid-cols-2" >
+            <div
+              v-for="location in tempLocations"
+              v-bind:key="location.idLocation"
+              class="grid-place md:grid grid-cols-2"
+            >
               <div class="w-auto choice-container">
-                 <input
+                <input
                   :id="location.name.toLowerCase()"
+                  :checked="locationIsChecked(location)"
+                  @click="locationHandler(location.idLocation)"
                   type="checkbox"
-                  name="locations"
+                  name="location"
                   :value="location.name.toLowerCase()"
                   class="check-with-label"
                 />
-                <label for="SCG-Bangsue" class="label-checkbox"
-                  >{{ location.name }}</label
-                >
-                </div>
+                <label for="SCG-Bangsue" class="label-checkbox">{{
+                  location.name
+                }}</label>
+              </div>
             </div>
           </div>
         </div>
+        
 
         <!-- Old IMAGE Form -->
         <div class="image-upload">
           <center>
             <label for="vaccine-img" class="pic-label w-min bg-gray-600">
-              <img src="../static/image-upload.jpg" id="upload-pic" class="hover:shadow-2xl"/>
+              <img
+                id="upload-pic"
+                src="../static/image-upload.jpg"
+                class="hover:shadow-2xl"
+              />
             </label>
             <input
-              
-              type="file"
               id="vaccine-img"
+              type="file"
               name="vaccine-img"
               accept="image/*"
-              
             />
             <!-- @change="imageHandler" -->
           </center>
@@ -124,64 +133,103 @@
 import BgCard from './BgCard.vue'
 export default {
   components: { BgCard },
-
-  props: {
-    vaccineProp: Object,
-  },
-
   data() {
     return {
-      backendURL: 'http://23.98.67.216/dev-backend/',
+      vaccine: Object,
       vaccineValidate: false,
-      lastVaccineProductId: null,
-
       tempLocations: [],
 
       vaccinetImageFile: null,
       currentImage: null,
-      vaccine: Object,
+      
+      
     }
+  },
+  props: {
+    vaccineProp: Object,
   },
 
   methods: {
     validateForm() {
       this.vaccineValidate = false
-      if (this.vaccine.vaccineName === '') {
+      if (this.vaccine.name === '') {
         this.vaccineValidate = true
         alert('กรุณากรอกชื่อวัคซีน')
       }
-      if (this.vaccine.vaccineDetail === '') {
+      if (this.vaccine.description === '') {
         this.vaccineValidate = true
         alert('กรุณากรอกรายละเอียดวัคซีน')
       }
-      if (this.vaccineImageFile === null) {
-        this.vaccineValidate = true
-        alert('กรุณาอัปโหลดไฟล์ภาพวัคซีน')
-      }
-      // if (this.vaccine.places.length === 0) {
+      // if (this.vaccine.image === null) {
       //   this.vaccineValidate = true
-      //   alert('กรุณาเลือกสถานที่ให้บริการวัคซีน')
+      //   alert('กรุณาอัปโหลดไฟล์ภาพวัคซีน')
       // }
+      if (this.vaccine.price === 0 || this.vaccine.price === null) {
+        this.vaccineValidate = true
+        alert('กรุณากรอกราคาวัคซีน')
+      }
+      if (this.vaccine.location.length === 0) {
+        this.vaccineValidate = true
+        alert('กรุณาเลือกสถานที่ให้บริการวัคซีน')
+      }
       if (this.vaccineValidate === false) {
         this.submitForm()
       }
     },
   
-  submitForm() {
-    console.log("Test Submit");
+    submitForm() {
+    console.log('method: submitForm');
+    this.$emit(
+      "submit-form",
+      this.vaccine
+    )
+    },
+
+    locationHandler(selectLocationID) {
+      const locationIsExist = this.vaccine.location.filter(function (e) {
+        return e.idLocation === selectLocationID;
+      });
+      for (let index = 0; index < this.vaccine.location.length; index++) {
+        if (this.vaccine.location[index] === locationIsExist[0]) {
+          this.vaccine.location.splice(index, 1);
+        }
       }
+      if (locationIsExist.length === 0) {
+        const index = this.tempLocations
+          .map(function (e) {
+            return e.idLocation;
+          })
+          .indexOf(selectLocationID);
+        this.vaccine.location.push({
+          idLocation: this.tempLocations[index].idLocation,
+          name: this.tempLocations[index].name,
+        });
+      }
+    },
+
+    locationIsChecked(location) {
+      const selected = this.vaccine.location.filter(
+        (item) => item.idLocation === location.idLocation
+      );
+      if (selected.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
   },
-
-  async created () {
-
+  async created() {
+    this.vaccine = this.vaccineProp
     this.tempLocations = await this.$axios.$get(`/locations`)
-    console.log(this.tempLocations);
+    // structure of object
+    console.log(this.vaccine);
   }
 }
 </script>
 
 <style scoped>
-input[type="file"]{
+input[type='file'] {
   width: 50%;
 }
 img {
@@ -288,7 +336,7 @@ h1 {
     padding: 2%;
     margin-left: 13%;
   }
-   #vaccine-price {
+  #vaccine-price {
     margin-left: 10%;
     padding: 2%;
     width: 70%;
@@ -308,7 +356,7 @@ h1 {
     padding: 1%;
     margin-left: 14%;
   }
-   #vaccine-price {
+  #vaccine-price {
     margin-left: 12%;
     padding: 1%;
     width: 70%;
