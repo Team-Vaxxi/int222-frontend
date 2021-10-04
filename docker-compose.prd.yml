@@ -1,0 +1,9 @@
+services:
+    frontend:
+      build: .
+      image: ghcr.io/team-vaxxi/int222-frontend:prd
+
+networks:
+    default:
+        external:
+            name: int222-network
