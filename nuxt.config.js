@@ -46,7 +46,9 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://23.98.67.216/dev-backend'
+    // created env.
+    // `http://${...}/`
+    baseURL: `http://bedev.vaxxi.pw/`
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

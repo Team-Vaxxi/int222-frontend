@@ -16,7 +16,7 @@
           >
           <input
             id="vaccine-name"
-            v-model="vaccine.vaccineName"
+            v-model="vaccine.name"
             type="text"
             name="vaccine-name"
             placeholder="ชื่อวัคซีน"
@@ -39,7 +39,7 @@
           <!-- v-model="product.productDetail" -->
           <textarea
             id="vaccine-desc"
-            v-model="vaccine.vaccineDetail"
+            v-model="vaccine.description"
             type="text"
             name="vaccine-desc"
             placeholder="รายละเอียดวัคซีน"
@@ -54,7 +54,7 @@
           >
           <input
             id="vaccine-price"
-            v-model="vaccine.vaccinePrice"
+            v-model="vaccine.price"
             type="number"
             name="vaccine-price"
             placeholder="ราคา"
@@ -75,10 +75,12 @@
             <span id="colors-heading" class="p-1 font-semibold"
               >สถานที่ฉีดวัคซีน
             </span>
-            <div v-for="location in tempLocations" v-bind:key="location.idLocation" class="grid-place md:grid grid-cols-2" >
+            <div v-for="location in locations" v-bind:key="location.idLocation" class="grid-place md:grid grid-cols-2" >
               <div class="w-auto choice-container">
                  <input
                   :id="location.name.toLowerCase()"
+                  
+
                   type="checkbox"
                   name="locations"
                   :value="location.name.toLowerCase()"
@@ -96,12 +98,11 @@
         <div class="image-upload">
           <center>
             <label for="vaccine-img" class="pic-label w-min bg-gray-600">
-              <img src="../static/image-upload.jpg" id="upload-pic" class="hover:shadow-2xl"/>
+              <img id="upload-pic" src="../static/image-upload.jpg"  class="hover:shadow-2xl"/>
             </label>
             <input
-              
-              type="file"
               id="vaccine-img"
+              type="file"
               name="vaccine-img"
               accept="image/*"
               
@@ -124,40 +125,37 @@
 import BgCard from './BgCard.vue'
 export default {
   components: { BgCard },
+  data() {
+    return {
+      vaccine: Object,
+      vaccineValidate: false,
+      locations: [],
 
+      vaccinetImageFile: null,
+      currentImage: null,
+      
+      
+    }
+  },
   props: {
     vaccineProp: Object,
   },
 
-  data() {
-    return {
-      backendURL: 'http://23.98.67.216/dev-backend/',
-      vaccineValidate: false,
-      lastVaccineProductId: null,
-
-      tempLocations: [],
-
-      vaccinetImageFile: null,
-      currentImage: null,
-      vaccine: Object,
-    }
-  },
-
   methods: {
     validateForm() {
-      this.vaccineValidate = false
-      if (this.vaccine.vaccineName === '') {
-        this.vaccineValidate = true
-        alert('กรุณากรอกชื่อวัคซีน')
-      }
-      if (this.vaccine.vaccineDetail === '') {
-        this.vaccineValidate = true
-        alert('กรุณากรอกรายละเอียดวัคซีน')
-      }
-      if (this.vaccineImageFile === null) {
-        this.vaccineValidate = true
-        alert('กรุณาอัปโหลดไฟล์ภาพวัคซีน')
-      }
+      // this.vaccineValidate = false
+      // if (this.vaccine.name === '') {
+      //   this.vaccineValidate = true
+      //   alert('กรุณากรอกชื่อวัคซีน')
+      // }
+      // if (this.vaccine.decsription === '') {
+      //   this.vaccineValidate = true
+      //   alert('กรุณากรอกรายละเอียดวัคซีน')
+      // }
+      // if (this.vaccine.image === null) {
+      //   this.vaccineValidate = true
+      //   alert('กรุณาอัปโหลดไฟล์ภาพวัคซีน')
+      // }
       // if (this.vaccine.places.length === 0) {
       //   this.vaccineValidate = true
       //   alert('กรุณาเลือกสถานที่ให้บริการวัคซีน')
@@ -167,15 +165,18 @@ export default {
       }
     },
   
-  submitForm() {
-    console.log("Test Submit");
-      }
+    submitForm() {
+    console.log('method submitForm');
+    this.$emit(
+      "submit-form",
+      this.vaccine
+    )
+    },
+
   },
-
-  async created () {
-
-    this.tempLocations = await this.$axios.$get(`/locations`)
-    console.log(this.tempLocations);
+  async created() {
+    this.vaccine = this.vaccineProp
+    this.locations = await this.$axios.$get(`/locations`)
   }
 }
 </script>
