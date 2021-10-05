@@ -46,7 +46,7 @@
             class="textarea hover:shadow-xl w-full placeholder-transparent"
           />
         </div>
-        
+
         <!-- Price -->
         <div class="flex flex-col md:flex-row p-1">
           <label for="vaccine-name" class="vacname font-semibold"
@@ -97,9 +97,8 @@
             </div>
           </div>
         </div>
-        
 
-        <!-- Old IMAGE Form -->
+        <!-- Image -->
         <div class="image-upload">
           <center>
             <label for="vaccine-img" class="pic-label w-min bg-gray-600">
@@ -110,6 +109,7 @@
               />
             </label>
             <input
+              @change="imageHandler"
               id="vaccine-img"
               type="file"
               name="vaccine-img"
@@ -138,11 +138,7 @@ export default {
       vaccine: Object,
       vaccineValidate: false,
       tempLocations: [],
-
-      vaccinetImageFile: null,
-      currentImage: null,
-      
-      
+      vaccineImageFile: null,
     }
   },
   props: {
@@ -160,10 +156,10 @@ export default {
         this.vaccineValidate = true
         alert('กรุณากรอกรายละเอียดวัคซีน')
       }
-      // if (this.vaccine.image === null) {
-      //   this.vaccineValidate = true
-      //   alert('กรุณาอัปโหลดไฟล์ภาพวัคซีน')
-      // }
+      if (this.vaccine.image === null) {
+        this.vaccineValidate = true
+        alert('กรุณาอัปโหลดไฟล์ภาพวัคซีน')
+      }
       if (this.vaccine.price === 0 || this.vaccine.price === null) {
         this.vaccineValidate = true
         alert('กรุณากรอกราคาวัคซีน')
@@ -176,55 +172,56 @@ export default {
         this.submitForm()
       }
     },
-  
+
     submitForm() {
-    console.log('method: submitForm');
-    this.$emit(
-      "submit-form",
-      this.vaccine
-    )
+      console.log('method: submitForm')
+      this.$emit('submit-form', this.vaccine, this.vaccineImageFile)
+    },
+
+    imageHandler(event) {
+      const input = event.target.files[0]
+      this.vaccineImageFile = input
     },
 
     locationHandler(selectLocationID) {
-      const locationIsExist = this.vaccine.location.filter(function (e) {
-        return e.idLocation === selectLocationID;
-      });
-      for (let index = 0; index < this.vaccine.location.length; index++) {
-        if (this.vaccine.location[index] === locationIsExist[0]) {
-          this.vaccine.location.splice(index, 1);
+      const locationIsExist = this.vaccine.locations.filter(function (e) {
+        return e.idLocation === selectLocationID
+      })
+      for (let index = 0; index < this.vaccine.locations.length; index++) {
+        if (this.vaccine.locations[index] === locationIsExist[0]) {
+          this.vaccine.locations.splice(index, 1)
         }
       }
       if (locationIsExist.length === 0) {
         const index = this.tempLocations
           .map(function (e) {
-            return e.idLocation;
+            return e.idLocation
           })
-          .indexOf(selectLocationID);
-        this.vaccine.location.push({
+          .indexOf(selectLocationID)
+        this.vaccine.locations.push({
           idLocation: this.tempLocations[index].idLocation,
           name: this.tempLocations[index].name,
-        });
+        })
       }
     },
 
     locationIsChecked(location) {
-      const selected = this.vaccine.location.filter(
+      const selected = this.vaccine.locations.filter(
         (item) => item.idLocation === location.idLocation
-      );
+      )
       if (selected.length > 0) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
-    }
-
+    },
   },
   async created() {
     this.vaccine = this.vaccineProp
     this.tempLocations = await this.$axios.$get(`/locations`)
     // structure of object
-    console.log(this.vaccine);
-  }
+    // console.log(this.vaccine)
+  },
 }
 </script>
 

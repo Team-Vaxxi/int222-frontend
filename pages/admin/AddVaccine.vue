@@ -1,32 +1,33 @@
 <template>
-  <vaccine-form @submit-form="addVaccine" :vaccineProp="addingVaccine"/>
+  <vaccine-form @submit-form="addVaccine" :vaccineProp="addingVaccine" />
 </template>
 
 <script>
-import VaccineForm from "../../components/VaccineForm.vue";
+import VaccineForm from '../../components/VaccineForm.vue'
 export default {
-  data(){
+  data() {
     return {
       addingVaccine: {
-        name: "",
-        description: "",
+        name: '',
+        description: '',
         price: 0,
-        image: "",
-        location: []
-      }
+        image: '',
+        locations: [],
+      },
     }
-  },  
+  },
   components: { VaccineForm },
   methods: {
-      addVaccine(vaccine){
-      console.log('method addVaccine');
-      console.log(vaccine);
-    }
-  }
-
+     async addVaccine(vaccine, vaccineImageFile) {
+      const formData = new FormData()
+      formData.append('vaccine', JSON.stringify(vaccine))
+      console.log(JSON.stringify(vaccine));
+      formData.append('image', vaccineImageFile)
+      await this.$axios.$post(`/vaccines`, formData)
+    },
+  },
 }
-</script>
+</script>x
 
 <style>
-
 </style>
