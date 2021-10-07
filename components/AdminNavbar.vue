@@ -34,6 +34,12 @@ body {
     text-align: center;
   }
 } */
+@media (max-width: 320px) {
+a {
+  font-size: medium;
+}
+}
+
 @media (min-width: 320px) {
   .smallDevice {
     width: 80%;
