@@ -49,7 +49,7 @@
 
         <!-- Price -->
         <div class="flex flex-col md:flex-row p-1">
-          <label for="vaccine-name" class="vacname font-semibold"
+          <label for="vaccine-price" class="vacname font-semibold"
             >ราคาวัคซีน</label
           >
           <input

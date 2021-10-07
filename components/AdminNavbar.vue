@@ -8,6 +8,9 @@
         <NuxtLink to="/admin/ShowVaccine" class="font-light text-white hover:text-black"
           >วัคซีน</NuxtLink
         >
+        <NuxtLink to="/admin/AddLocation" class="font-light text-white hover:text-black"
+          >สถานที่</NuxtLink
+        >
         <NuxtLink to="/admin/UserManage" class="font-light text-white hover:text-black"
           >ผู้ใช้งาน</NuxtLink
         >
