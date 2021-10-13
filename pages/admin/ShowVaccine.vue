@@ -1,13 +1,11 @@
 <template>
   <div>
     <div class="flex justify-center">
-      <bg-card class="w-1/6 m-10 bg-card hover:shadow-lg"
-        ><NuxtLink to="/admin/AddVaccine" class="flex justify-center"
-          ><h2 class="p-5 font-semibold text-lg">
-            เพิ่มประเภทวัคซีน
-          </h2></NuxtLink
-        ></bg-card
-      >
+      <bg-card class="w-1/6 m-10 bg-card hover:shadow-lg">
+        <NuxtLink to="/admin/AddVaccine" class="flex justify-center">
+          <h2 class="p-5 font-semibold text-lg">เพิ่มประเภทวัคซีน</h2>
+        </NuxtLink>
+      </bg-card>
     </div>
 
     <div class="w-full flex justify-center">

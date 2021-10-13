@@ -4,16 +4,34 @@
       <a href="/"><h1 class="vaxxi font-bold">Vaxxi</h1></a>
     </div>
     <div class="flex justify-center w-full">
-      <div class="flex justify-between flex-wrap content-center smallDevice text-xl">
-        <NuxtLink to="/admin/ShowVaccine" class="font-light text-white hover:text-black"
-          >วัคซีน</NuxtLink
+      <div
+        class="
+          flex
+          justify-between
+          flex-wrap
+          content-center
+          smallDevice
+          text-xl
+        "
+      >
+        <NuxtLink
+          to="/admin/ShowVaccine"
+          class="font-light text-white hover:text-black"
         >
-        <NuxtLink to="/admin/AddLocation" class="font-light text-white hover:text-black"
-          >สถานที่</NuxtLink
+          วัคซีน
+        </NuxtLink>
+        <NuxtLink
+          to="/admin/AddLocation"
+          class="font-light text-white hover:text-black"
         >
-        <NuxtLink to="/admin/UserManage" class="font-light text-white hover:text-black"
-          >ผู้ใช้งาน</NuxtLink
+          สถานที่
+        </NuxtLink>
+        <NuxtLink
+          to="/admin/UserManage"
+          class="font-light text-white hover:text-black"
         >
+          ผู้ใช้งาน
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -35,9 +53,9 @@ body {
   }
 } */
 @media (max-width: 320px) {
-a {
-  font-size: medium;
-}
+  a {
+    font-size: medium;
+  }
 }
 
 @media (min-width: 320px) {
