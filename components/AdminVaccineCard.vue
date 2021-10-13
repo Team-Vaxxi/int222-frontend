@@ -12,19 +12,24 @@
           </span>
           <div class="md:mt-5">
             <div class="flex flex-row md:flex-col md:justify-between md:w-16">
-              <button
-                class="
-                  bg-green-500
-                  p-2
-                  rounded-xl
-                  text-white
-                  w-16
-                  md:w-auto
-                  hover:text-black
-                "
+              <nuxt-link
+                to="/admin/EditVaccine"
+                class="md:w-auto"
+                @click="setEditingVaccine(vaccine)"
               >
-                แก้ไข
-              </button>
+                <button
+                  class="
+                    p-2
+                    w-16
+                    bg-green-500
+                    rounded-xl
+                    text-white
+                    hover:text-black
+                  "
+                >
+                  แก้ไข
+                </button>
+              </nuxt-link>
               <button
                 class="
                   bg-red-600
@@ -38,6 +43,7 @@
                   md:w-auto
                   hover:text-black
                 "
+                @click="deleteVaccine(vaccine.idVaccine)"
               >
                 ลบ
               </button>
@@ -56,14 +62,31 @@ export default {
   props: ['vaccine'],
   data() {
     return {
-      imageURL: `${process.env.BACKEND_URL}/vaccines/images`
+      imageURL: `${process.env.BACKEND_URL}/vaccines/images`,
     }
   },
   methods: {
     getImage(imageName) {
       return `${this.imageURL}/${imageName}`
     },
-  }
+    setEditingVaccine(vaccine) {
+      // set vaccine to vuex
+    },
+    async deleteVaccine(idVaccine) {
+      const del = confirm('Are you sure?')
+      if (del) {
+        await this.$axios.$delete(`/vaccines/${idVaccine}`).then(
+          (response) => {
+            alert('Delete succeeded!')
+            window.location.reload()
+          },
+          (error) => {
+            alert(error)
+          }
+        )
+      }
+    },
+  },
 }
 </script>
 
