@@ -12,7 +12,7 @@ export default {
   components: { VaccineForm },
   data() {
     return {
-      imageUpload: '../static/image-upload.jpg',
+      imageUpload: '/_nuxt/static/image-upload.jpg',
       addingVaccine: {
         name: '',
         description: '',

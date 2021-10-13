@@ -145,6 +145,7 @@ export default {
   async created() {
     this.vaccine = this.vaccineProp
     this.tempLocations = await this.$axios.$get(`/locations`)
+    console.log(this.imageUpload);
     // structure of object
     // console.log(this.vaccine)
   },
