@@ -77,18 +77,18 @@
             </span>
             <div
               v-for="location in tempLocations"
-              v-bind:key="location.idLocation"
+              :key="location.idLocation"
               class="grid-place md:grid grid-cols-2"
             >
               <div class="w-auto choice-container">
                 <input
                   :id="location.name.toLowerCase()"
                   :checked="locationIsChecked(location)"
-                  @click="locationHandler(location.idLocation)"
                   type="checkbox"
                   name="location"
                   :value="location.name.toLowerCase()"
                   class="check-with-label"
+                  @click="locationHandler(location.idLocation)"
                 />
                 <label for="SCG-Bangsue" class="label-checkbox">{{
                   location.name
@@ -109,11 +109,11 @@
               />
             </label>
             <input
-              @change="imageHandler"
               id="vaccine-img"
               type="file"
               name="vaccine-img"
               accept="image/*"
+              @change="imageHandler"
             />
             <!-- @change="imageHandler" -->
           </center>
@@ -133,6 +133,9 @@
 import BgCard from './BgCard.vue'
 export default {
   components: { BgCard },
+  props: {
+    vaccineProp: Object,
+  },
   data() {
     return {
       vaccine: Object,
@@ -141,10 +144,12 @@ export default {
       vaccineImageFile: null,
     }
   },
-  props: {
-    vaccineProp: Object,
+  async created() {
+    this.vaccine = this.vaccineProp
+    this.tempLocations = await this.$axios.$get(`/locations`)
+    // structure of object
+    // console.log(this.vaccine)
   },
-
   methods: {
     validateForm() {
       this.vaccineValidate = false
@@ -164,7 +169,7 @@ export default {
         this.vaccineValidate = true
         alert('กรุณากรอกราคาวัคซีน')
       }
-      if (this.vaccine.location.length === 0) {
+      if (this.vaccine.locations.length === 0) {
         this.vaccineValidate = true
         alert('กรุณาเลือกสถานที่ให้บริการวัคซีน')
       }
@@ -174,7 +179,7 @@ export default {
     },
 
     submitForm() {
-      console.log('method: submitForm')
+      // console.log('method: submitForm')
       this.$emit('submit-form', this.vaccine, this.vaccineImageFile)
     },
 
@@ -215,12 +220,6 @@ export default {
         return false
       }
     },
-  },
-  async created() {
-    this.vaccine = this.vaccineProp
-    this.tempLocations = await this.$axios.$get(`/locations`)
-    // structure of object
-    // console.log(this.vaccine)
   },
 }
 </script>
