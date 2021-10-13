@@ -104,7 +104,7 @@
             <label for="vaccine-img" class="pic-label w-min bg-gray-600">
               <img
                 id="upload-pic"
-                src="../static/image-upload.jpg"
+                :src="imageUpload"
                 class="hover:shadow-2xl"
               />
             </label>
@@ -133,9 +133,7 @@
 import BgCard from './BgCard.vue'
 export default {
   components: { BgCard },
-  props: {
-    vaccineProp: Object,
-  },
+  props: ['vaccineProp', 'imageUpload'],
   data() {
     return {
       vaccine: Object,

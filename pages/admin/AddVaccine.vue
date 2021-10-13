@@ -1,5 +1,9 @@
 <template>
-  <vaccine-form :vaccine-prop="addingVaccine" @submit-form="addVaccine" />
+  <vaccine-form
+    :vaccine-prop="addingVaccine"
+    :image-upload="imageUpload"
+    @submit-form="addVaccine"
+  />
 </template>
 
 <script>
@@ -8,6 +12,7 @@ export default {
   components: { VaccineForm },
   data() {
     return {
+      imageUpload: '../static/image-upload.jpg',
       addingVaccine: {
         name: '',
         description: '',
@@ -25,7 +30,7 @@ export default {
       formData.append('image', vaccineImageFile)
       await this.$axios.$post(`/vaccines`, formData).then(
         (response) => {
-          alert("Upload succeeded!")
+          alert('Upload succeeded!')
           window.location.reload()
         },
         (error) => {
