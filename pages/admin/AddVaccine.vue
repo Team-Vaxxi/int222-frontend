@@ -1,10 +1,11 @@
 <template>
-  <vaccine-form @submit-form="addVaccine" :vaccineProp="addingVaccine" />
+  <vaccine-form :vaccine-prop="addingVaccine" @submit-form="addVaccine" />
 </template>
 
 <script>
 import VaccineForm from '../../components/VaccineForm.vue'
 export default {
+  components: { VaccineForm },
   data() {
     return {
       addingVaccine: {
@@ -16,18 +17,25 @@ export default {
       },
     }
   },
-  components: { VaccineForm },
   methods: {
-     async addVaccine(vaccine, vaccineImageFile) {
+    async addVaccine(vaccine, vaccineImageFile) {
       const formData = new FormData()
       formData.append('vaccine', JSON.stringify(vaccine))
-      console.log(JSON.stringify(vaccine));
+      // console.log(JSON.stringify(vaccine))
       formData.append('image', vaccineImageFile)
-      await this.$axios.$post(`/vaccines`, formData)
+      await this.$axios.$post(`/vaccines`, formData).then(
+        (response) => {
+          alert("Upload succeeded!")
+          window.location.reload()
+        },
+        (error) => {
+          alert(error)
+        }
+      )
     },
   },
 }
-</script>x
+</script>
 
 <style>
 </style>
