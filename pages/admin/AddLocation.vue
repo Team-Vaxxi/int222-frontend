@@ -48,7 +48,7 @@
         <ol class="p-3 lg:px-10">
           <li
             v-for="location in tempLocations"
-            v-bind:key="location.idLocation"
+            :key="location.idLocation"
           >
             {{ location.name }}
             <button
@@ -101,12 +101,11 @@ export default {
       if (this.locationValidate === false) {
         await this.$axios.$post(`/locations`, this.addingLocation).then(
           (response) => {
-            console.log(response)
             alert('Upload succeeded!')
             window.location.reload()
           },
           (error) => {
-            console.log(error)
+            alert(error)
           }
         )
       }
