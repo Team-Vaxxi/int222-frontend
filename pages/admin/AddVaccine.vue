@@ -10,6 +10,7 @@
 import VaccineForm from '../../components/VaccineForm.vue'
 export default {
   components: { VaccineForm },
+  layout: 'admin',
   data() {
     return {
       imageUpload: '/_nuxt/static/image-upload.jpg',

@@ -37,6 +37,7 @@ import BgCard from '../../components/BgCard.vue'
 
 export default {
   components: { BgCard, AdminVaccineCard },
+  layout: 'admin',
   data() {
     return {
       vaccineList: [],

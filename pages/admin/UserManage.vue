@@ -41,6 +41,7 @@
 import BgCard from '../../components/BgCard.vue'
 export default {
   components: { BgCard },
+  layout: 'admin',
   data() {
     return {
       tempUsers: [],
