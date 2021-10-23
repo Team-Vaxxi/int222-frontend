@@ -11,6 +11,7 @@
 import VaccineForm from '../../components/VaccineForm.vue'
 export default {
   components: { VaccineForm },
+  layout: 'admin',
   computed: {
     editingVaccine() {
       return this.$store.state.vaccine.vaccine
