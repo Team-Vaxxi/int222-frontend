@@ -13,7 +13,7 @@ export default {
   layout: 'admin',
   data() {
     return {
-      imageUpload: '/_nuxt/static/image-upload.jpg',
+      imageUpload: '/image-upload.jpg',
       addingVaccine: {
         name: '',
         description: '',
