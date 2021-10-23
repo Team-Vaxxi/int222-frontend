@@ -1,40 +1,34 @@
 <template>
-<div>
+  <div>
     <div class="flex justify-center">
       <bg-card class="m-5 w-3/5 bgcard mt-10 lg:w-1/2 p-5">
-        <h1 class="text-center font-extrabold text-xl p-5">
-          บัญชีผู้ใช้งาน
-        </h1>
-        <ol class="p-3 lg:px-10">
-          <li
-            v-for="user in tempUsers"
-            :key="user.idUser"
-          >
-            {{ user.name }}  {{ user.surname}}
-            <button
-              class="
-                bg-red-600
-                p-2
-                rounded-xl
-                text-white
-                ml-5
-                md:ml-0
-                md:mt-3
-                w-16
-                md:w-auto
-                hover:text-black
-              "
-              @click="editUser(user)"
-            >
-              แก้ไข
-            </button>
-          </li>
-        </ol>
+        <h1 class="text-center font-extrabold text-xl p-5">บัญชีผู้ใช้งาน</h1>
+          <div class="flex" v-for="(user, index) in tempUsers" :key="user.idUser">
+            <div class="flex-auto md:mt-3 self-center"><span class="align-middle inline-block">{{ index + 1}}. {{ user.name }} {{ user.surname }}</span></div>
+            <div class="flex-initial">
+              <button
+                class="
+                  bg-red-600
+                  p-2
+                  rounded-xl
+                  text-white
+                  ml-5
+                  md:ml-0 md:mt-3
+                  w-16
+                  md:w-auto
+                  hover:text-black
+                  flex-initial
+                "
+                @click="editUser(user)"
+              >
+                แก้ไข
+              </button>
+            </div>
+          </div>
+        
       </bg-card>
     </div>
-</div>
-  
-  
+  </div>
 </template>
 
 <script>
@@ -53,11 +47,10 @@ export default {
   methods: {
     editUser(user) {
       this.$store.commit('user/setEditingUser', user)
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style>
-
 </style>
