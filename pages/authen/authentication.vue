@@ -163,11 +163,14 @@
     <user-form
       v-show="isRegis"
       class="
-      md:col-start-1 md:col-end-10 
-      lg:col-start-4 lg:col-end-10
-      bg-white"
+      sm:col-span-12
+      md:col-start-1 md:col-end-11
+      lg:col-start-3 lg:col-end-11
+      mt-10
+      rounded-xl
+      "
     >
-      <button
+      <!-- <button
         class="
           sm:col-start-1 sm:col-end-1
           md:col-start-1 md:col-end-1
@@ -186,7 +189,7 @@
         @click="toggleLogin"
       >
         Back
-      </button>
+      </button> -->
     </user-form>
   </div>
 </template>
