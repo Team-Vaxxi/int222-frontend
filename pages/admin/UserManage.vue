@@ -24,7 +24,7 @@
                 md:w-auto
                 hover:text-black
               "
-              @click="editUser(user.idUser)"
+              @click="editUser(user)"
             >
               แก้ไข
             </button>
@@ -51,8 +51,8 @@ export default {
     this.tempUsers = await this.$axios.$get('/users')
   },
   methods: {
-    editUser(idUser) {
-      console.log(idUser);
+    editUser(user) {
+      this.$store.commit('user/setEditingUser', user)
     }
   }
 }
