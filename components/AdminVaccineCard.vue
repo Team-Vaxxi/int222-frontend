@@ -15,7 +15,7 @@
               <nuxt-link
                 to="/admin/EditVaccine"
                 class="md:w-auto"
-                @click="setEditingVaccine(vaccine)"
+                @click.native="setEditingVaccine(vaccine)"
               >
                 <button
                   class="
@@ -69,8 +69,11 @@ export default {
     getImage(imageName) {
       return `${this.imageURL}/${imageName}`
     },
+    // set vaccine to vuex
     setEditingVaccine(vaccine) {
-      // set vaccine to vuex
+      const imageURL = this.getImage(vaccine.image)
+      this.$store.commit('vaccine/setEditingVaccine', vaccine)
+      this.$store.commit('vaccine/setImageURL', imageURL)
     },
     async deleteVaccine(idVaccine) {
       const del = confirm('Are you sure?')
