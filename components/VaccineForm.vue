@@ -6,7 +6,7 @@
         @submit.prevent="validateForm"
       >
         <h1 class="text-center font-extrabold text-xl p-2">
-          เพิ่มประเภทวัคซีน
+          {{ header }}
         </h1>
 
         <!-- name -->
@@ -133,7 +133,7 @@
 import BgCard from './BgCard.vue'
 export default {
   components: { BgCard },
-  props: ['vaccineProp', 'imageUpload'],
+  props: ['header', 'vaccineProp', 'imageUpload'],
   data() {
     return {
       vaccine: Object,

@@ -1,5 +1,6 @@
 <template>
   <vaccine-form
+    header="เพิ่มประเภทวัคซีน"
     :vaccine-prop="addingVaccine"
     :image-upload="imageUpload"
     @submit-form="addVaccine"
