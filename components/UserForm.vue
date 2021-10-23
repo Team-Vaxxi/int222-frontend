@@ -15,7 +15,7 @@
                   block
                   uppercase
                   tracking-wide
-                  text-gray-700 text-xs
+                  text-gray-700
                   font-bold
                   mb-2
                 "
@@ -51,7 +51,7 @@
                   block
                   uppercase
                   tracking-wide
-                  text-gray-700 text-xs
+                  text-gray-700
                   font-bold
                   mb-2
                 "
@@ -86,7 +86,7 @@
                   block
                   uppercase
                   tracking-wide
-                  text-gray-700 text-xs
+                  text-gray-700
                   font-bold
                   mb-2
                 "
@@ -121,7 +121,7 @@
                   block
                   uppercase
                   tracking-wide
-                  text-gray-700 text-xs
+                  text-gray-700
                   font-bold
                   mb-2
                 "
@@ -137,19 +137,15 @@
                   w-full
                   bg-gray-200
                   text-gray-700
-                  border border-red-500
+                  border border-gray-200
                   rounded
                   py-3
                   px-4
-                  mb-3
                   leading-tight
-                  focus:outline-none focus:bg-white
+                  focus:outline-none focus:bg-white focus:border-gray-500
                 "
                 type="text"
               />
-              <p class="text-red-500 text-xs italic">
-                Please fill out this field.
-              </p>
             </div>
             <!-- surname -->
             <div class="w-full md:w-1/2 px-3">
@@ -159,7 +155,7 @@
                   block
                   uppercase
                   tracking-wide
-                  text-gray-700 text-xs
+                  text-gray-700
                   font-bold
                   mb-2
                 "
@@ -185,8 +181,27 @@
             </div>
           </div>
           <!-- gender -->
-          <!-- <div>
-              </div> -->
+          <label class="block text-gray-700 font-bold mb-2">เพศ</label>
+          <div class="flex">
+            <div class="flex items-center mb-2 mr-4">
+              <input
+                id="male"
+                type="radio"
+                name="male"
+                class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2"
+              />
+              <label class="text-gray-700">ชาย</label>
+            </div>
+            <div class="flex items-center mb-2">
+              <input
+                id="male"
+                type="radio"
+                name="male"
+                class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2"
+              />
+              <label class="text-gray-700">หญิง</label>
+            </div>
+          </div>
           <!-- address -->
           <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
@@ -196,7 +211,7 @@
                   block
                   uppercase
                   tracking-wide
-                  text-gray-700 text-xs
+                  text-gray-700
                   font-bold
                   mb-2
                 "
@@ -224,8 +239,30 @@
             </div>
           </div>
           <!-- dob -->
-          <!-- <div>
-              </div> -->
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+              <label class="block uppercase text-gray-700 font-bold mb-2">วันเกิด</label>
+              <input
+                id="birthday"
+                type="date"
+                name="birthday"
+                class="
+                  appearance-none
+                  block
+                  w-full
+                  bg-gray-200
+                  text-gray-700
+                  border border-gray-200
+                  rounded
+                  py-3
+                  px-4
+                  mb-3
+                  leading-tight
+                  focus:outline-none focus:bg-white focus:border-gray-500
+                "
+              />
+            </div>
+          </div>
           <!-- tel -->
           <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
@@ -234,11 +271,10 @@
                   block
                   uppercase
                   tracking-wide
-                  text-gray-700 text-xs
+                  text-gray-700
                   font-bold
                   mb-2
                 "
-                for="grid-password"
               >
                 เบอร์โทรศัพท์
               </label>
@@ -268,9 +304,14 @@
 </template>
 
 <script>
+// import Datepicker from '@themesberg/tailwind-datepicker/Datepicker'
 import BgCard from './BgCard.vue'
 export default {
   components: { BgCard },
+  data() {
+    return {}
+  },
+  methods: {},
 }
 </script>
 
