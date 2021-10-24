@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class="grid md:grid-cols-6">
     <!-- กล่องกรอกเพิ่มสถานที่-->
 
-    <div class="flex justify-center">
-      <bg-card class="w-3/5 bgcard mt-10 lg:w-1/2 p-5"
+    <div class="md:flex md:justify-center md:col-start-1 md:col-end-7">
+      <bg-card class="md:mx-5 md:mt-10 md:w-1/2 p-5"
         ><h1 class="text-center font-extrabold text-xl p-5">
           เพิ่มสถานที่ให้บริการวัคซีน
         </h1>
         <form @submit.prevent="validateForm">
           <div class="flex flex-col justify-between md:flex-row p-3 md:p-3">
-            <label for="adding-place" class="font-semibold w-auto"
+            <label for="adding-place" class="font-semibold self-center"
               >ชื่อสถานที่ให้บริการวัคซีน</label
             >
             <!--  input location -->
@@ -31,8 +31,7 @@
               "
             />
           </div>
-
-          <div class="flex justify-end">
+          <div class="flex justify-end md:mr-3">
             <input type="submit" value="เพิ่ม" class="save-button" />
           </div>
         </form>
@@ -40,8 +39,8 @@
     </div>
 
     <!-- show locations -->
-    <div class="flex justify-center">
-      <bg-card class="m-5 w-3/5 bgcard mt-10 lg:w-1/2 p-5">
+    <div class="md:flex md:justify-center md:col-start-1 md:col-end-7">
+      <bg-card class="md:mx-5 md:mt-10 md:w-1/2 p-5">
         <h1 class="text-center font-extrabold text-xl p-5">
           สถานที่ให้บริการวัคซีนที่มีในระบบขณะนี้
         </h1>
@@ -52,8 +51,8 @@
         >
           <div class="flex-auto self-center">
             <span class="align-middle inline-block"
-              >{{ index + 1 }}. {{ location.name }} </span
-            >
+              >{{ index + 1 }}. {{ location.name }}
+            </span>
           </div>
           <div class="flex-initial">
             <button
@@ -63,9 +62,7 @@
                 md:px-4
                 rounded-xl
                 text-white
-                ml-5
-                md:ml-0
-                md:mt-3
+                md:ml-0 md:mt-3
                 w-16
                 md:w-auto
                 hover:text-black
