@@ -1,31 +1,41 @@
 <template>
-  <div>
-    <div class="flex justify-center">
-      <bg-card class="m-5 w-3/5 bgcard mt-10 lg:w-1/2 p-5">
+  <div class="grid md:grid-cols-5 lg:grid-cols-5">
+    <div
+      class="
+        flex
+        justify-center
+        md:col-start-2 md:col-end-5
+        lg:col-start-2 lg:col-end-5
+      "
+    >
+      <bg-card class="w-full lg:w-4/6 mt-10 p-5">
         <h1 class="text-center font-extrabold text-xl p-5">บัญชีผู้ใช้งาน</h1>
-          <div class="flex" v-for="(user, index) in tempUsers" :key="user.idUser">
-            <div class="flex-auto md:mt-3 self-center"><span class="align-middle inline-block">{{ index + 1}}. {{ user.name }} {{ user.surname }}</span></div>
-            <div class="flex-initial">
-              <button
-                class="
-                  bg-red-600
-                  p-2
-                  rounded-xl
-                  text-white
-                  ml-5
-                  md:ml-0 md:mt-3
-                  w-16
-                  md:w-auto
-                  hover:text-black
-                  flex-initial
-                "
-                @click="editUser(user)"
-              >
-                แก้ไข
-              </button>
-            </div>
+        <!-- component show list -->
+        <div class="flex mt-3" v-for="(user, index) in tempUsers" :key="user.idUser">
+          <div class="flex-auto self-center">
+            <span class="align-middle inline-block"
+              >{{ index + 1 }}. {{ user.name }} {{ user.surname }}</span
+            >
           </div>
-        
+          <div class="flex-initial">
+            <button
+              class="
+                bg-red-600
+                p-2
+                rounded-xl
+                text-white
+                md:ml-0
+                w-16
+                md:w-auto
+                hover:text-black
+                flex-initial
+              "
+              @click="editUser(user)"
+            >
+              แก้ไข
+            </button>
+          </div>
+        </div>
       </bg-card>
     </div>
   </div>
