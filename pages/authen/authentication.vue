@@ -2,12 +2,12 @@
   <div class="grid sm:grid-cols-10 md:grid-cols-10 lg:grid-cols-12">
       <!-- Login Form -->
     <div
-      v-show="isRegis == false"
+      v-show="!isRegis"
       class="
         sm:col-start-3 sm:col-end-9
         md:col-start-4 md:col-end-8
         lg:col-start-5 lg:col-end-9
-        mt-10
+        md:mt-8
       "
     >
       <div>
@@ -135,9 +135,11 @@
                     text-sm
                     font-medium
                     rounded-md
-                    text-white
-                    bg-indigo-600
+                    text-indigo-600
+                    bg-white
+                    border-indigo-700
                     hover:bg-indigo-700
+                    hover:text-white
                     focus:outline-none
                     focus:ring-2
                     focus:ring-offset-2
@@ -166,30 +168,11 @@
       sm:col-span-12
       md:col-start-1 md:col-end-11
       lg:col-start-3 lg:col-end-11
-      mt-10
+      md:mt-5
       rounded-xl
       "
+      @toggle-regis="toggleRegis"
     >
-      <!-- <button
-        class="
-          sm:col-start-1 sm:col-end-1
-          md:col-start-1 md:col-end-1
-          lg:col-start-1 lg:col-end-1
-          mt-4
-          ml-4
-          hover:bg-gray-100
-          text-gray-800
-          font-semibold
-          py-2
-          px-4
-          border border-gray-400
-          rounded
-          shadow
-        "
-        @click="toggleLogin"
-      >
-        Back
-      </button> -->
     </user-form>
   </div>
 </template>
@@ -203,17 +186,14 @@ export default {
   layout: 'default',
   data() {
     return {
-      isRegis: true,
+      isRegis: false,
     }
   },
   methods: {
     toggleRegis() {
-      this.isRegis = true
+      this.isRegis = !this.isRegis
     },
 
-    toggleLogin() {
-      this.isRegis = false
-    },
   },
 }
 </script>
