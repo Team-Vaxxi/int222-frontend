@@ -12,6 +12,3 @@ export default {
   component: { DefaultNavbar}
 }
 </script>
-<style>
-
-</style>

@@ -45,16 +45,22 @@
         <h1 class="text-center font-extrabold text-xl p-5">
           สถานที่ให้บริการวัคซีนที่มีในระบบขณะนี้
         </h1>
-        <ol class="p-3 lg:px-10">
-          <li
-            v-for="location in tempLocations"
-            :key="location.idLocation"
-          >
-            {{ location.name }}
+        <div
+          v-for="(location, index) in tempLocations"
+          :key="location.idLocation"
+          class="flex mt-3"
+        >
+          <div class="flex-auto self-center">
+            <span class="align-middle inline-block"
+              >{{ index + 1 }}. {{ location.name }} </span
+            >
+          </div>
+          <div class="flex-initial">
             <button
               class="
                 bg-red-600
                 p-2
+                md:px-4
                 rounded-xl
                 text-white
                 ml-5
@@ -63,13 +69,14 @@
                 w-16
                 md:w-auto
                 hover:text-black
+                flex-initial
               "
               @click="deleteLocation(location.idLocation)"
             >
               ลบ
             </button>
-          </li>
-        </ol>
+          </div>
+        </div>
       </bg-card>
     </div>
   </div>
@@ -114,16 +121,16 @@ export default {
 
     async deleteLocation(idLocation) {
       const del = confirm('Are you sure?')
-      if(del) {
+      if (del) {
         await this.$axios.$delete(`/locations/${idLocation}`).then(
-        (response) => {
-          alert('Delete succeeded!')
-          window.location.reload()
-        },
-        (error) => {
-          alert(error)
-        }
-      )
+          (response) => {
+            alert('Delete succeeded!')
+            window.location.reload()
+          },
+          (error) => {
+            alert(error)
+          }
+        )
       }
     },
   },

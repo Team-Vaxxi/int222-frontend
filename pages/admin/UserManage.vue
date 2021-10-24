@@ -11,7 +11,7 @@
       <bg-card class="w-full lg:w-4/6 mt-10 p-5">
         <h1 class="text-center font-extrabold text-xl p-5">บัญชีผู้ใช้งาน</h1>
         <!-- component show list -->
-        <div class="flex mt-3" v-for="(user, index) in tempUsers" :key="user.idUser">
+        <div v-for="(user, index) in tempUsers" class="flex mt-3" :key="user.idUser">
           <div class="flex-auto self-center">
             <span class="align-middle inline-block"
               >{{ index + 1 }}. {{ user.name }} {{ user.surname }}</span
@@ -20,7 +20,7 @@
           <div class="flex-initial">
             <button
               class="
-                bg-red-600
+                bg-green-500
                 p-2
                 rounded-xl
                 text-white
