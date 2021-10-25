@@ -1,7 +1,7 @@
 <template>
   <div class="vaxxi-bar flex flex-row">
-    <div class="p-4 pl-5 text-2xl font-bold text-white">
-      <a href="/"><h1 class="vaxxi font-bold">Vaxxi</h1></a>
+    <div class="p-4 pl-5 text-2xl font-bold ">
+      <a href="/"><h1 class="vaxxi text-white font-bold">Vaxxi</h1></a>
     </div>
     <div class="flex justify-center w-full">
       <div
