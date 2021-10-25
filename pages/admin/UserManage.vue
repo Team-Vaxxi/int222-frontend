@@ -4,11 +4,12 @@
       class="
         flex
         justify-center
+        m-5
         md:col-start-2 md:col-end-5
         lg:col-start-2 lg:col-end-5
       "
     >
-      <bg-card class="w-full lg:w-4/6 md:mt-10 p-5">
+      <bg-card class="bgcard rounded-xl w-full lg:w-4/6 md:mt-10 p-5">
         <h1 class="text-center font-extrabold text-xl p-5">บัญชีผู้ใช้งาน</h1>
         <!-- component show list -->
         <div v-for="(user, index) in tempUsers" class="flex mt-3" :key="user.idUser">

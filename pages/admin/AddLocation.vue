@@ -2,8 +2,8 @@
   <div class="grid md:grid-cols-6">
     <!-- กล่องกรอกเพิ่มสถานที่-->
 
-    <div class="md:flex md:justify-center md:col-start-1 md:col-end-7">
-      <bg-card class="md:mx-5 md:mt-10 md:w-1/2 p-5"
+    <div class="flex justify-center mt-10 md:col-start-1 md:col-end-7">
+      <bg-card class="bgcard rounded-xl md:mx-5 md:mt-10 md:w-1/2 p-5"
         ><h1 class="text-center font-extrabold text-xl p-5">
           เพิ่มสถานที่ให้บริการวัคซีน
         </h1>
@@ -39,8 +39,8 @@
     </div>
 
     <!-- show locations -->
-    <div class="md:flex md:justify-center md:col-start-1 md:col-end-7">
-      <bg-card class="md:mx-5 md:mt-10 md:w-1/2 p-5">
+    <div class="flex justify-center my-10 md:col-start-1 md:col-end-7">
+      <bg-card class="bgcard rounded-xl md:mx-5 md:mt-10 md:w-1/2 p-5">
         <h1 class="text-center font-extrabold text-xl p-5">
           สถานที่ให้บริการวัคซีนที่มีในระบบขณะนี้
         </h1>
