@@ -10,9 +10,11 @@
         md:mt-8
       "
     >
-      <div>
+      <div class="m-5 md:m-0">
         <bg-card
           class="
+            bgcard rounded-xl
+            w-full
             min-h-full
             flex
             items-center
@@ -26,7 +28,7 @@
           <div class="space-y-8">
             <div>
               <h2
-                class="mt-6 text-center text-3xl font-extrabold text-gray-900"
+                class="text-center text-3xl font-extrabold text-gray-900"
               >
                 เข้าสู่ระบบจองวัคซีน
               </h2>
