@@ -1,57 +1,53 @@
 <template>
-  <bg-card class="p-5">
-    <ul>
-      <div class="flex flex-col md:flex-row">
-        <!-- แทนกล่องรูป เปลี่ยนตัวแปร-->
-        <li class="">
-          <img class="ml-1 md:w-3/4" :src="getImage(vaccine.image)" />
-        </li>
-        <li class="mt-5">
-          <span class="text-gray-900 font-bold text-lg lg:text-xl">
-            {{ vaccine.name }}
-          </span>
-          <div class="md:mt-5">
-            <div class="flex flex-row md:flex-col md:justify-between md:w-16">
-              <nuxt-link
-                to="/admin/EditVaccine"
-                class="md:w-auto"
-                @click.native="setEditingVaccine(vaccine)"
-              >
-                <button
-                  class="
-                    p-2
-                    w-16
-                    bg-green-500
-                    rounded-xl
-                    text-white
-                    hover:text-black
-                  "
-                >
-                  แก้ไข
-                </button>
-              </nuxt-link>
-              <button
-                class="
-                  bg-red-600
-                  p-2
-                  rounded-xl
-                  text-white
-                  ml-5
-                  md:ml-0
-                  md:mt-3
-                  w-16
-                  md:w-auto
-                  hover:text-black
-                "
-                @click="deleteVaccine(vaccine.idVaccine)"
-              >
-                ลบ
-              </button>
-            </div>
-          </div>
-        </li>
+  <bg-card class="w-full m-5">
+    <div>
+      <div>
+        <img class="w-full h-36 object-cover rounded-t-lg" :src="getImage(vaccine.image)" />
       </div>
-    </ul>
+      <div class="flex justify-center">
+        <span class="text-gray-900 font-bold text-lg lg:text-xl">
+          {{ vaccine.name }}
+        </span>
+      </div>
+      <div class="flex">
+        <div class="flex-auto">
+          <nuxt-link
+            to="/admin/EditVaccine"
+            @click.native="setEditingVaccine(vaccine)"
+          >
+            <button
+              class="
+                m-3
+                p-2
+                w-16
+                bg-green-500
+                rounded-xl
+                text-white
+                hover:text-black
+              "
+            >
+              แก้ไข
+            </button>
+          </nuxt-link>
+        </div>
+        <div class="flex-initial">
+          <button
+            class="
+              m-3
+              p-2
+              w-16
+              bg-red-600
+              rounded-xl
+              text-white
+              hover:text-black
+            "
+            @click="deleteVaccine(vaccine.idVaccine)"
+          >
+            ลบ
+          </button>
+        </div>
+      </div>
+    </div>
   </bg-card>
 </template>
 
