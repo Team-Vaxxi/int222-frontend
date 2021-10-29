@@ -110,7 +110,7 @@ export default {
             window.location.reload()
           },
           (error) => {
-            alert(error)
+            alert(error.response.data.error)
           }
         )
       }
@@ -125,7 +125,7 @@ export default {
             window.location.reload()
           },
           (error) => {
-            alert(error)
+            alert(error.response.data.error)
           }
         )
       }

@@ -36,7 +36,7 @@ export default {
           this.$router.replace("/")
         },
         (error) => {
-          alert(error)
+          alert(error.response.data.error)
         }
       )
     },
