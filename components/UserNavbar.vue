@@ -1,7 +1,7 @@
 <template>
   <div class="vaxxi-bar h-16">
     <div class="flex justify-between">
-      <div class="">
+      <Nuxt-link to="/user/home">
         <h1
           class="
             p-4
@@ -14,12 +14,12 @@
         >
           Vaxxi
         </h1>
-      </div>
-      <div class="self-center pr-3">
+      </Nuxt-link>
+
+      <Nuxt-link to="/user/personal">
           <!-- note: Change to Nuxtlink after back-end get authentication -->
-          <!-- <NuxtLink to="/user/personInfo" class="font-light text-white hover:text-black"> ข้อมูลส่วนตัว </NuxtLink> -->
-        <h2 class="text-white">ข้อมูลส่วนตัว</h2>
-      </div>
+        <h2 class="font-light text-white hover:text-black p-5" >ข้อมูลส่วนตัว</h2>
+    </Nuxt-link>
     </div>
   </div>
 </template>
