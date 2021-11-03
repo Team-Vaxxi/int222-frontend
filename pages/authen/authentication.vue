@@ -39,9 +39,9 @@
                   <label for="idCard" class="sr-only">บัตรประชาชน</label>
                   <input
                     id="idCard"
-                    v-model="username"
+                    v-model="user.idCard"
                     name="idCard"
-                    type="idCard"
+                    type="text"
                     autocomplete="idCard"
                     class="
                       appearance-none
@@ -68,7 +68,7 @@
                   <label for="password" class="sr-only">รหัสผ่าน</label>
                   <input
                     id="password"
-                    v-model="password"
+                    v-model="user.password"
                     name="password"
                     type="password"
                     autocomplete="password"
@@ -183,12 +183,13 @@ import UserForm from '~/components/UserForm.vue'
 export default {
   components: { BgCard, UserForm },
   layout: 'default',
-  middleware: 'auth',
   data() {
     return {
       isRegis: false,
-      username: '',
-      password: '',
+      user: {
+        idCard: '',
+        password: '',
+      },
     }
   },
   methods: {
@@ -198,18 +199,13 @@ export default {
     async login(e) {
       e.preventDefault()
 
-      const payload = {
-        username: this.username,
-        password: this.password,
-      };
-
       try {
         await this.$auth.loginWith('local', {
-          data: payload,
+          data: this.user,
         })
         this.$router.push('/')
       } catch (e) {
-        this.$router.push('/authen/login')
+        this.$router.push('/authen/authentication')
       }
     },
   },

@@ -53,7 +53,7 @@ export default {
       local: {
         endpoints: {
           login: { url: 'auth/login', method: 'post', propertyName: 'data.token' },
-          user: { url: 'me', method: 'get', propertyName: 'data' },
+          user: { url: 'auth/me', method: 'get', propertyName: 'data' },
           logout: false
         }
       }
