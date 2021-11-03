@@ -15,7 +15,7 @@
             สมัครสมาชิก
           </h1>
           <!-- idCard -->
-          <div class="w-full">
+          <div class="w-full mb-3">
             <label
               class="block uppercase tracking-wide text-gray-700 font-bold mb-2"
               for="grid-password"
@@ -42,7 +42,7 @@
             />
           </div>
           <!-- password -->
-          <div class="w-full">
+          <div class="w-full mt-3">
             <label
               class="block uppercase tracking-wide text-gray-700 font-bold mb-2"
             >
@@ -68,7 +68,7 @@
             />
           </div>
           <!-- verifyPassword -->
-          <div class="w-full">
+          <div class="w-full mt-3">
             <label
               class="block uppercase tracking-wide text-gray-700 font-bold mb-2"
             >
@@ -94,7 +94,7 @@
             />
           </div>
           <!-- name -->
-          <div class="w-full">
+          <div class="w-full mt-3">
             <label
               class="block uppercase tracking-wide text-gray-700 font-bold mb-2"
               for="grid-first-name"
@@ -120,7 +120,7 @@
             />
           </div>
           <!-- surname -->
-          <div class="w-full">
+          <div class="w-full mt-3">
             <label
               id="surname"
               class="block uppercase tracking-wide text-gray-700 font-bold mb-2"
@@ -146,7 +146,7 @@
           </div>
           <!-- gender -->
 
-          <label class="block text-gray-700 font-bold mb-2">เพศ</label>
+          <label class="block text-gray-700 font-bold mb-2 mt-3">เพศ</label>
           <div class="flex">
             <div class="flex items-center mb-2 mr-4">
               <input
@@ -168,7 +168,7 @@
             </div>
           </div>
           <!-- address -->
-          <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="flex flex-wrap -mx-3 mt-3">
             <div class="w-full px-3">
               <label
                 id="address"
@@ -204,7 +204,7 @@
             </div>
           </div>
           <!-- dob -->
-          <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="flex flex-wrap -mx-3">
             <div class="w-full px-3">
               <label class="block uppercase text-gray-700 font-bold mb-2"
                 >วันเกิด</label
