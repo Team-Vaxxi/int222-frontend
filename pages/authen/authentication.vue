@@ -200,11 +200,11 @@ export default {
       e.preventDefault()
 
       try {
-        await this.$auth.loginWith('local', {
-          data: this.user,
-        })
+        const response = await this.$auth.loginWith('local', { data: this.user })
+        console.log(response)
         this.$router.push('/')
-      } catch (e) {
+      } catch (err) {
+        console.log(err)
         this.$router.push('/authen/authentication')
       }
     },
