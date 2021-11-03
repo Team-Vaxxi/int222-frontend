@@ -1,6 +1,6 @@
 <template>
   <div class="grid sm:grid-cols-10 md:grid-cols-10 lg:grid-cols-12">
-      <!-- Login Form -->
+    <!-- Login Form -->
     <div
       v-show="!isRegis"
       class="
@@ -13,7 +13,8 @@
       <div class="m-5 md:m-0">
         <bg-card
           class="
-            bgcard rounded-xl
+            bgcard
+            rounded-xl
             w-full
             min-h-full
             flex
@@ -27,19 +28,18 @@
         >
           <div class="space-y-8">
             <div>
-              <h2
-                class="text-center text-3xl font-extrabold text-gray-900"
-              >
+              <h2 class="text-center text-3xl font-extrabold text-gray-900">
                 เข้าสู่ระบบจองวัคซีน
               </h2>
             </div>
-            <form class="mt-8 space-y-6" action="#" method="POST">
+            <form class="mt-8 space-y-6" @submit="login">
               <input type="hidden" name="remember" value="true" />
               <div class="rounded-md shadow-sm -space-y-px">
                 <div>
                   <label for="idCard" class="sr-only">บัตรประชาชน</label>
                   <input
                     id="idCard"
+                    v-model="username"
                     name="idCard"
                     type="idCard"
                     autocomplete="idCard"
@@ -68,6 +68,7 @@
                   <label for="password" class="sr-only">รหัสผ่าน</label>
                   <input
                     id="password"
+                    v-model="password"
                     name="password"
                     type="password"
                     autocomplete="password"
@@ -112,9 +113,7 @@
                     bg-indigo-600
                     hover:bg-indigo-700
                     focus:outline-none
-                    focus:ring-2
-                    focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
                   "
                 >
                   <span
@@ -143,9 +142,7 @@
                     hover:bg-indigo-700
                     hover:text-white
                     focus:outline-none
-                    focus:ring-2
-                    focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
                     mt-2
                   "
                   @click="toggleRegis"
@@ -167,11 +164,11 @@
     <user-form
       v-show="isRegis"
       class="
-      sm:col-span-12
-      md:col-start-1 md:col-end-11
-      lg:col-start-3 lg:col-end-11
-      md:mt-5
-      rounded-xl
+        sm:col-span-12
+        md:col-start-1 md:col-end-11
+        lg:col-start-3 lg:col-end-11
+        md:mt-5
+        rounded-xl
       "
       @toggle-regis="toggleRegis"
     >
@@ -186,16 +183,35 @@ import UserForm from '~/components/UserForm.vue'
 export default {
   components: { BgCard, UserForm },
   layout: 'default',
+  middleware: 'auth',
   data() {
     return {
       isRegis: false,
+      username: '',
+      password: '',
     }
   },
   methods: {
     toggleRegis() {
       this.isRegis = !this.isRegis
     },
+    async login(e) {
+      e.preventDefault()
 
+      const payload = {
+        username: this.username,
+        password: this.password,
+      };
+
+      try {
+        await this.$auth.loginWith('local', {
+          data: payload,
+        })
+        this.$router.push('/')
+      } catch (e) {
+        this.$router.push('/authen/login')
+      }
+    },
   },
 }
 </script>

@@ -45,13 +45,30 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
   ],
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'auth/login', method: 'post', propertyName: 'data.token' },
+          user: { url: 'me', method: 'get', propertyName: 'data' },
+          logout: false
+        }
+      }
+    },
+    redirect: {
+      login: '/authen/authentication'
+    }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // created env.
     // `http://${...}/`
-    baseURL: `${process.env.BACKEND_URL}`
+    baseURL: `${process.env.BACKEND_URL}`,
+    credentials: true
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

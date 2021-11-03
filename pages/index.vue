@@ -9,6 +9,7 @@
 import ShowVaccine from './admin/ShowVaccine.vue'
 export default {
   components: { ShowVaccine },
+  middleware: 'auth'
 }
 </script>
 
