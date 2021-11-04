@@ -1,14 +1,8 @@
 <template>
   <div class="w-full">
-    <div class="grid 
-          md:grid-cols-5
-          md:justify-items-center
-          w-full">
-      <bg-card class="md:col-start-2 
-      md:col-end-5 
-      md:mt-5 p-2 
-      md:p-5">
-        <form>
+    <div class="grid md:grid-cols-5 md:justify-items-center w-full">
+      <bg-card class="md:col-start-2 md:col-end-5 md:mt-5 p-2 md:p-5">
+        <form @submit.prevent="orderVaccine">
           <!-- image -->
           <div>
             <img
@@ -21,7 +15,9 @@
             <!-- vaccine name  and price -->
             <div class="flex mt-5">
               <div class="flex-auto self-center">
-                <h1 class="text-6xl md:text-7xl font-extrabold">{{ vaccine.name }}</h1>
+                <h1 class="text-6xl md:text-7xl font-extrabold">
+                  {{ vaccine.name }}
+                </h1>
               </div>
               <div class="flex-initial self-center">
                 <div class="text-lg md:text-xl">ราคา</div>
@@ -41,10 +37,11 @@
               >
                 <label>
                   <input
-                    type="checkbox"
+                    v-model="selectedLocation"
+                    type="radio"
                     class="radio"
                     name="location"
-                    :value="location.name"
+                    :value="location.idLocation"
                   />
                   {{ location.name }}
                 </label>
@@ -54,7 +51,9 @@
             <!-- description -->
             <div class="mt-5">
               <p class="text-lg font-extrabold md:text-xl">รายละเอียด</p>
-              <p class="mt-1 md:mt-3 text-gray-900 md:text-lg">{{ vaccine.description }}</p>
+              <p class="mt-1 md:mt-3 text-gray-900 md:text-lg">
+                {{ vaccine.description }}
+              </p>
             </div>
           </div>
 
@@ -79,9 +78,7 @@
                   bg-indigo-600
                   hover:bg-indigo-700
                   focus:outline-none
-                  focus:ring-2
-                  focus:ring-offset-2
-                  focus:ring-indigo-500
+                  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
                 "
               >
                 <span class="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -91,7 +88,7 @@
             </div>
             <div class="mt-2">
               <Nuxt-link to="/user/home">
-              <button
+                <button
                   type="button"
                   class="
                     group
@@ -111,9 +108,7 @@
                     hover:bg-indigo-700
                     hover:text-white
                     focus:outline-none
-                    focus:ring-2
-                    focus:ring-offset-2
-                    focus:ring-indigo-500
+                    focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
                     mt-2
                   "
                 >
@@ -123,7 +118,7 @@
                   </span>
                   กลับเข้าสู่หน้าเลือกวัคซีน
                 </button>
-                </Nuxt-link>
+              </Nuxt-link>
             </div>
           </div>
         </form>
@@ -139,18 +134,41 @@ export default {
   layout: 'user',
   data() {
     return {
+      user: this.$auth.user,
+      selectedLocation: null,
       vaccine: this.$store.state.vaccine.vaccine,
       imageURL: `${process.env.BACKEND_URL}/vaccines/images`,
     }
+  },
+  created() {
+    this.vaccine = this.$store.state.vaccine.vaccine
   },
   methods: {
     getImage(imageName) {
       return `${this.imageURL}/${imageName}`
     },
-  },
-  created() {
-    this.vaccine = this.$store.state.vaccine.vaccine
-    console.log(this.vaccine.locations)
+    async orderVaccine() {
+      if (this.user.vaccine === null) {
+        if (this.selectedLocation === null) {
+          alert('Please select the location')
+        } else {
+          this.user.password = null
+          this.user.vaccine = this.vaccine.idVaccine
+          this.user.location = this.selectedLocation
+          this.user.isOrder = "1"
+          await this.$axios.$put(`/users/${this.user.idUser}`, this.user).then(
+            (response) => {
+              alert('Vaccine has been ordered!')
+            },
+            (error) => {
+              alert(error.response.data.error)
+            }
+          )
+        }
+      } else {
+        alert("You can't order anymore vaccine!")
+      }
+    },
   },
 }
 </script>
