@@ -202,7 +202,7 @@ export default {
       try {
         const response = await this.$auth.loginWith('local', { data: this.user })
         console.log(response)
-        this.$router.push('/')
+        this.$router.replace('/')
       } catch (err) {
         console.log(err)
         this.$router.push('/authen/authentication')

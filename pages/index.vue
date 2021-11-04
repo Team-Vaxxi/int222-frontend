@@ -1,14 +1,15 @@
 <template>
   <div>
-    <show-vaccine />
+    <home />
     <!-- <admin /> -->
   </div>
 </template>
 
 <script>
-import ShowVaccine from './admin/ShowVaccine.vue'
+import Home from './user/Home.vue'
 export default {
-  components: { ShowVaccine },
+  components: { Home },
+  layout: 'user',
   middleware: 'auth'
 }
 </script>
