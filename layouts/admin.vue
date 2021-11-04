@@ -9,7 +9,14 @@
 import AdminNavbar from '../components/AdminNavbar.vue'
 export default {
   components: { AdminNavbar },
+  middleware: 'auth',
+  created() {
+    if (this.$auth.user.role !== 'admin') {
+      alert('Access denied!')
+      this.$router.replace('/');
+    }
   }
+}
 </script>
 
 <style>

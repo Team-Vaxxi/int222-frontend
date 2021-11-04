@@ -200,12 +200,15 @@ export default {
       e.preventDefault()
 
       try {
-        const response = await this.$auth.loginWith('local', { data: this.user })
-        console.log(response)
-        this.$router.replace('/')
+        await this.$auth.loginWith('local', { data: this.user })
+        alert('Login succeeded!')
+        if (this.$auth.user.role !== 'admin') {
+          this.$router.replace('/')
+        } else {
+          this.$router.replace('/admin/ShowVaccine');
+        }
       } catch (err) {
-        console.log(err)
-        this.$router.push('/authen/authentication')
+        alert('Username or password is incorrect!')
       }
     },
   },

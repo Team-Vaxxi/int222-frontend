@@ -306,7 +306,7 @@
               </button>
               </Nuxt-link>
             </div>
-            <div class="mt-2">
+            <div class="mt-2" @click="logout">
               <Nuxt-link to="/">
               <button
                   type="button"
@@ -356,6 +356,12 @@ import BgCard from '~/components/BgCard.vue'
 export default {
   components: { BgCard },
   layout: 'user',
+  methods: {
+    async logout() {
+      await this.$auth.logout();
+      this.$router.replace('/authen/authentication');
+    }
+  }
 }
 </script>
 

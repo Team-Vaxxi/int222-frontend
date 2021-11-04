@@ -10,7 +10,6 @@ import Home from './user/Home.vue'
 export default {
   components: { Home },
   layout: 'user',
-  middleware: 'auth'
 }
 </script>
 
