@@ -310,7 +310,7 @@
                     focus:border-gray-500
                   "
                   type="text"
-                  :value="user.vaccine"
+                  :value="user.vaccine.name"
                   readonly
                 />
               </div>
@@ -348,7 +348,7 @@
                     focus:border-gray-500
                   "
                   type="text"
-                  :value="user.location"
+                  :value="user.location.name"
                   readonly
                 />
               </div>
