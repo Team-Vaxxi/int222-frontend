@@ -1,7 +1,7 @@
 <template>
   <div class="vaxxi-bar flex flex-row">
     <div class="p-4 pl-5 text-2xl font-bold ">
-      <a href="/"><h1 class="vaxxi text-white font-bold">Vaxxi</h1></a>
+      <a href="/"><h1 class="vaxxi text-white font-bold sm:text-sm md:text-4xl">Vaxxi</h1></a>
     </div>
     <div class="flex justify-center w-full">
       <div
@@ -11,31 +11,49 @@
           flex-wrap
           content-center
           smallDevice
-          text-xl
         "
       >
         <NuxtLink
           to="/admin/ShowVaccine"
-          class="font-light text-white hover:text-black"
+          class="font-light text-white hover:text-black sm:text-sm md:text-2xl"
         >
           วัคซีน
         </NuxtLink>
         <NuxtLink
           to="/admin/AddLocation"
-          class="font-light text-white hover:text-black"
+          class="font-light text-white hover:text-black sm:text-sm md:text-2xl"
         >
           สถานที่
         </NuxtLink>
         <NuxtLink
           to="/admin/UserManage"
-          class="font-light text-white hover:text-black"
+          class="font-light text-white hover:text-black sm:text-sm md:text-2xl"
         >
           ผู้ใช้งาน
         </NuxtLink>
       </div>
     </div>
+    <div @click="logout"
+    class="flex-initial self-center pr-3">
+      <button
+      type="button"
+      class="font-light text-white hover:text-black sm:text-sm md:text-2xl whitespace-nowrap">
+        ออกจากระบบ
+      </button>
+    </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+      this.$router.replace('/authen/authentication')
+    },
+  }
+}
+</script>
 
 <style>
 body {
@@ -52,6 +70,7 @@ body {
     text-align: center;
   }
 } */
+
 @media (max-width: 320px) {
   a {
     font-size: medium;
