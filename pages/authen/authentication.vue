@@ -163,6 +163,7 @@
     <!-- Register form -->
     <user-form
       v-show="isRegis"
+      header="สมัครสมาชิก"
       class="
         sm:col-span-12
         md:col-start-1 md:col-end-11
