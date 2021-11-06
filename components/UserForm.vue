@@ -15,153 +15,42 @@
           >
             {{ header }}
           </h1>
-          <!-- idCard -->
-          <div class="w-full mb-3">
-            <label
-              class="block uppercase tracking-wide text-gray-700 font-bold mb-2"
-              for="grid-password"
-            >
-              บัตรประชาชน
-            </label>
-            <input
-              id="idCard"
-              v-model="user.idCard"
-              class="
-                appearance-none
-                block
-                w-full
-                bg-gray-200
-                text-gray-700
-                border border-gray-200
-                rounded
-                py-3
-                px-4
-                mb-3
-                leading-tight
-                focus:outline-none
-                focus:bg-white
-                focus:border-gray-500
-              "
-              type="text"
-            />
-          </div>
-          <!-- password -->
-          <div class="w-full mt-3">
-            <label
-              class="block uppercase tracking-wide text-gray-700 font-bold mb-2"
-            >
-              รหัสผ่าน
-            </label>
-            <input
-              id="password"
-              v-model="user.password"
-              class="
-                appearance-none
-                block
-                w-full
-                bg-gray-200
-                text-gray-700
-                border border-gray-200
-                rounded
-                py-3
-                px-4
-                mb-3
-                leading-tight
-                focus:outline-none
-                focus:bg-white
-                focus:border-gray-500
-              "
-              type="password"
-            />
-          </div>
-          <!-- verifyPassword -->
-          <div class="w-full mt-3">
-            <label
-              class="block uppercase tracking-wide text-gray-700 font-bold mb-2"
-            >
-              ยืนยันรหัสผ่าน
-            </label>
-            <input
-              id="verifyPassword"
-              v-model="confirmPassword"
-              class="
-                appearance-none
-                block
-                w-full
-                bg-gray-200
-                text-gray-700
-                border border-gray-200
-                rounded
-                py-3
-                px-4
-                mb-3
-                leading-tight
-                focus:outline-none
-                focus:bg-white
-                focus:border-gray-500
-              "
-              type="password"
-            />
-          </div>
-          <!-- name -->
-          <div class="w-full mt-3">
-            <label
-              class="block uppercase tracking-wide text-gray-700 font-bold mb-2"
-              for="grid-first-name"
-            >
-              ชื่อ
-            </label>
-            <input
-              id="name"
-              v-model="user.name"
-              class="
-                appearance-none
-                block
-                w-full
-                bg-gray-200
-                text-gray-700
-                border border-gray-200
-                rounded
-                py-3
-                px-4
-                leading-tight
-                focus:outline-none
-                focus:bg-white
-                focus:border-gray-500
-              "
-              type="text"
-            />
-          </div>
-          <!-- surname -->
-          <div class="w-full mt-3">
-            <label
-              id="surname"
-              class="block uppercase tracking-wide text-gray-700 font-bold mb-2"
-            >
-              นามสกุล
-            </label>
-            <input
-              v-model="user.surname"
-              class="
-                appearance-none
-                block
-                w-full
-                bg-gray-200
-                text-gray-700
-                border border-gray-200
-                rounded
-                py-3
-                px-4
-                leading-tight
-                focus:outline-none
-                focus:bg-white
-                focus:border-gray-500
-              "
-              type="text"
-            />
-          </div>
-          <!-- gender -->
+          <user-form-text-input
+            header="บัตรประชาชน"
+            property-name="idCard"
+            input-type="text"
+            @update-data="updateData"
+          />
+          <user-form-text-input
+            header="รหัสผ่าน"
+            property-name="password"
+            input-type="password"
+            @update-data="updateData"
+          />
+          <user-form-text-input
+            header="ยืนยันรหัสผ่าน"
+            property-name="confirmPassword"
+            input-type="password"
+            @update-data="updateData"
+          >
+            <p v-show="validateUser.confirmPassword" class="text-red-500">
+              รหัสผ่านไม่ตรงกัน
+            </p>
+          </user-form-text-input>
+          <user-form-text-input
+            header="ชื่อ"
+            property-name="name"
+            input-type="text"
+            @update-data="updateData"
+          />
+          <user-form-text-input
+            header="นามสกุล"
+            property-name="surname"
+            input-type="text"
+            @update-data="updateData"
+          />
 
+          <!-- gender -->
           <label class="block text-gray-700 font-bold mb-2 mt-3">เพศ</label>
           <div class="flex">
             <div class="flex items-center mb-2 mr-4">
@@ -172,6 +61,7 @@
                 name="male"
                 value="Male"
                 class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2"
+                @click="validateGender"
               />
               <label class="text-gray-700">ชาย</label>
             </div>
@@ -183,116 +73,33 @@
                 name="female"
                 value="Female"
                 class="h-4 w-4 text-gray-700 px-3 py-3 border rounded mr-2"
+                @click="validateGender"
               />
               <label class="text-gray-700">หญิง</label>
             </div>
           </div>
-          <!-- address -->
-          <div class="flex flex-wrap -mx-3 mt-3">
-            <div class="w-full px-3">
-              <label
-                id="address"
-                class="
-                  block
-                  uppercase
-                  tracking-wide
-                  text-gray-700
-                  font-bold
-                  mb-2
-                "
-                for="grid-password"
-              >
-                ที่อยู่
-              </label>
-              <input
-                v-model="user.address"
-                class="
-                  appearance-none
-                  block
-                  w-full
-                  bg-gray-200
-                  text-gray-700
-                  border border-gray-200
-                  rounded
-                  py-3
-                  px-4
-                  mb-3
-                  leading-tight
-                  focus:outline-none
-                  focus:bg-white
-                  focus:border-gray-500
-                "
-                type="text"
-              />
-            </div>
-          </div>
-          <!-- dob -->
-          <div class="flex flex-wrap -mx-3">
-            <div class="w-full px-3">
-              <label class="block uppercase text-gray-700 font-bold mb-2"
-                >วันเกิด</label
-              >
-              <input
-                id="birthday"
-                v-model="user.dob"
-                type="date"
-                name="birthday"
-                class="
-                  appearance-none
-                  block
-                  w-full
-                  bg-gray-200
-                  text-gray-700
-                  border border-gray-200
-                  rounded
-                  py-3
-                  px-4
-                  mb-3
-                  leading-tight
-                  focus:outline-none
-                  focus:bg-white
-                  focus:border-gray-500
-                "
-              />
-            </div>
-          </div>
-          <!-- tel -->
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
-              <label
-                class="
-                  block
-                  uppercase
-                  tracking-wide
-                  text-gray-700
-                  font-bold
-                  mb-2
-                "
-              >
-                เบอร์โทรศัพท์
-              </label>
-              <input
-                v-model="user.tel"
-                class="
-                  appearance-none
-                  block
-                  w-full
-                  bg-gray-200
-                  text-gray-700
-                  border border-gray-200
-                  rounded
-                  py-3
-                  px-4
-                  mb-3
-                  leading-tight
-                  focus:outline-none
-                  focus:bg-white
-                  focus:border-gray-500
-                "
-                type="text"
-              />
-            </div>
-          </div>
+          <p v-show="validateUser.gender" class="text-red-500">
+            กรุณาระบุ 'เพศ'
+          </p>
+
+          <user-form-text-input
+            header="ที่อยู่"
+            property-name="address"
+            input-type="text"
+            @update-data="updateData"
+          />
+          <user-form-text-input
+            header="วันเกิด"
+            property-name="dob"
+            input-type="date"
+            @update-data="updateData"
+          />
+          <user-form-text-input
+            header="เบอร์โทรศัพท์"
+            property-name="tel"
+            input-type="text"
+            @update-data="updateData"
+          />
         </form>
       </div>
       <div class="flex justify-center mb-5">
@@ -348,8 +155,10 @@
 <script>
 // import Datepicker from '@themesberg/tailwind-datepicker/Datepicker'
 import BgCard from './BgCard.vue'
+import UserFormTextInput from './UserFormTextInput.vue'
+
 export default {
-  components: { BgCard },
+  components: { BgCard, UserFormTextInput },
   props: ['header'],
   data() {
     return {
@@ -362,56 +171,65 @@ export default {
         tel: '',
         idCard: '',
         password: '',
+        confirmPassword: '',
       },
-      confirmPassword: '',
+      validateUser: {
+        name: true,
+        surname: true,
+        gender: true,
+        address: true,
+        dob: true,
+        tel: true,
+        idCard: true,
+        password: true,
+        confirmPassword: false,
+      },
     }
   },
   methods: {
     toggleLogin() {
       this.$emit('toggle-regis')
     },
+    updateData(data, propertyName, isInvalid) {
+      this.user[propertyName] = data
+      this.validateUser[propertyName] = isInvalid
+    },
+    validateGender() {
+      this.validateUser.gender = false
+    },
+    validateConfirmPassword() {
+      if (this.user.password !== this.user.confirmPassword) {
+        this.validateUser.confirmPassword = true
+      } else {
+        this.validateUser.confirmPassword = false
+      }
+    },
     async createUser() {
-      let userInvalidate = false
-      console.log(this.user);
+      let userInvalid = false
+      this.validateConfirmPassword()
 
-      if (this.user.idCard === '') {
-        userInvalidate = true
-        alert('กรุณากรอกเลขบัตรประชาชน')
-      }
-      if (this.user.password === '') {
-        userInvalidate = true
-        alert('กรุณากรอกรหัสผ่าน')
-      }
-      if (this.user.password !== this.confirmPassword) {
-        userInvalidate = true
-        alert('รหัสผ่านไม่ตรงกัน')
-      }
-      if (this.user.name === '') {
-        userInvalidate = true
-        alert('กรุณากรอกชื่อ')
-      }
-      if (this.user.surname === '') {
-        userInvalidate = true
-        alert('กรุณากรอกนามสกุล')
-      }
-      if (this.user.gender === '') {
-        userInvalidate = true
-        alert('กรุณาระบุเพศ')
-      }
-      if (this.user.address === '') {
-        userInvalidate = true
-        alert('กรุณากรอกที่อยู่')
-      }
-      if (this.user.dob === '') {
-        userInvalidate = true
-        alert('กรุณาระบุวันเกิด')
-      }
-      if (this.user.tel === '') {
-        userInvalidate = true
-        alert('กรุณากรอกเบอร์โทรศัพท์')
+      if (this.validateUser.idCard) {
+        userInvalid = true
+      } else if (this.validateUser.password) {
+        userInvalid = true
+      } else if (this.userInvalid.confirmPassword) {
+        userInvalid = true
+      } else if (this.validateUser.name) {
+        userInvalid = true
+      } else if (this.validateUser.surname) {
+        userInvalid = true
+      } else if (this.validateUser.gender) {
+        userInvalid = true
+      } else if (this.validateUser.address) {
+        userInvalid = true
+      } else if (this.validateUser.dob) {
+        userInvalid = true
+      } else if (this.validateUser.tel) {
+        userInvalid = true
       }
 
-      if (userInvalidate === false) {
+      if (userInvalid === false) {
+        delete this.user.confirmPassword
         await this.$axios.$post(`/auth/register`, this.user).then(
           (response) => {
             alert('Register succeeded!')
@@ -421,6 +239,8 @@ export default {
             alert(error.response.data.error)
           }
         )
+      } else {
+        alert('กรุณากรอกข้อมูลให้ถูกต้อง')
       }
     },
   },
