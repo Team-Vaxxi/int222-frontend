@@ -29,12 +29,15 @@
 </template>
 <script>
 export default {
-  props: ['header', 'propertyName', 'inputType'],
+  props: ['header', 'propertyName', 'dataHandler', 'inputType'],
   data() {
     return {
-      inputData: '',
+      inputData: this.dataHandler,
       invalidData: true,
     }
+  },
+  created() {
+    this.updateData(this.inputData)
   },
   methods: {
     updateData(data) {

@@ -171,7 +171,9 @@
         md:mt-5
         rounded-xl
       "
+      :user-prop="userProp"
       @toggle-regis="toggleRegis"
+      @update-user="register"
     >
     </user-form>
   </div>
@@ -191,6 +193,17 @@ export default {
         idCard: '',
         password: '',
       },
+      userProp: {
+        name: '',
+        surname: '',
+        gender: '',
+        address: '',
+        dob: '',
+        tel: '',
+        idCard: '',
+        password: '',
+        confirmPassword: '',
+      }
     }
   },
   methods: {
@@ -206,11 +219,22 @@ export default {
         if (this.$auth.user.role !== 'admin') {
           this.$router.replace('/')
         } else {
-          this.$router.replace('/admin/ShowVaccine');
+          this.$router.replace('/admin/ShowVaccine')
         }
       } catch (err) {
         alert('Username or password is incorrect!')
       }
+    },
+    async register(user) {
+      await this.$axios.$post(`/auth/register`, user).then(
+        (response) => {
+          alert('ลงทะเบียนสำเร็จ')
+          window.location.reload()
+        },
+        (error) => {
+          alert(error.response.data.error)
+        }
+      )
     },
   },
 }

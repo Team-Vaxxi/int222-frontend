@@ -19,18 +19,21 @@
             header="บัตรประชาชน"
             property-name="idCard"
             input-type="text"
+            :data-handler="user.idCard"
             @update-data="updateData"
           />
           <user-form-text-input
             header="รหัสผ่าน"
             property-name="password"
             input-type="password"
+            :data-handler="user.password"
             @update-data="updateData"
           />
           <user-form-text-input
             header="ยืนยันรหัสผ่าน"
             property-name="confirmPassword"
             input-type="password"
+            :data-handler="user.confirmPassword"
             @update-data="updateData"
           >
             <p v-show="validateUser.confirmPassword" class="text-red-500">
@@ -41,12 +44,14 @@
             header="ชื่อ"
             property-name="name"
             input-type="text"
+            :data-handler="user.name"
             @update-data="updateData"
           />
           <user-form-text-input
             header="นามสกุล"
             property-name="surname"
             input-type="text"
+            :data-handler="user.surname"
             @update-data="updateData"
           />
 
@@ -86,18 +91,21 @@
             header="ที่อยู่"
             property-name="address"
             input-type="text"
+            :data-handler="user.address"
             @update-data="updateData"
           />
           <user-form-text-input
             header="วันเกิด"
             property-name="dob"
             input-type="date"
+            :data-handler="user.dob"
             @update-data="updateData"
           />
           <user-form-text-input
             header="เบอร์โทรศัพท์"
             property-name="tel"
             input-type="text"
+            :data-handler="user.tel"
             @update-data="updateData"
           />
         </form>
@@ -159,20 +167,10 @@ import UserFormTextInput from './UserFormTextInput.vue'
 
 export default {
   components: { BgCard, UserFormTextInput },
-  props: ['header'],
+  props: ['header', 'userProp'],
   data() {
     return {
-      user: {
-        name: '',
-        surname: '',
-        gender: '',
-        address: '',
-        dob: '',
-        tel: '',
-        idCard: '',
-        password: '',
-        confirmPassword: '',
-      },
+      user: Object,
       validateUser: {
         name: true,
         surname: true,
@@ -186,13 +184,25 @@ export default {
       },
     }
   },
+  created() {
+    this.user = this.userProp
+    this.user.password = null
+    this.user.confirmPassword = null
+    this.validateGender()
+  },
   methods: {
     toggleLogin() {
       this.$emit('toggle-regis')
+      if (this.header === 'แก้ไขข้อมูลผู้ใช้') {
+          this.$router.replace('/admin/UserManage')
+      }
     },
     updateData(data, propertyName, isInvalid) {
       this.user[propertyName] = data
       this.validateUser[propertyName] = isInvalid
+      if (propertyName === 'confirmPassword') {
+        this.validateConfirmPassword()
+      }
     },
     validateGender() {
       this.validateUser.gender = false
@@ -204,15 +214,20 @@ export default {
         this.validateUser.confirmPassword = false
       }
     },
-    async createUser() {
+    createUser() {
       let userInvalid = false
       this.validateConfirmPassword()
+
+      if (this.header === 'แก้ไขข้อมูลผู้ใช้' && this.user.password === '') {
+          this.validateUser.password = false
+          this.validateUser.confirmPassword = false
+      }
 
       if (this.validateUser.idCard) {
         userInvalid = true
       } else if (this.validateUser.password) {
         userInvalid = true
-      } else if (this.userInvalid.confirmPassword) {
+      } else if (this.validateUser.confirmPassword) {
         userInvalid = true
       } else if (this.validateUser.name) {
         userInvalid = true
@@ -230,15 +245,7 @@ export default {
 
       if (userInvalid === false) {
         delete this.user.confirmPassword
-        await this.$axios.$post(`/auth/register`, this.user).then(
-          (response) => {
-            alert('Register succeeded!')
-            window.location.reload()
-          },
-          (error) => {
-            alert(error.response.data.error)
-          }
-        )
+        this.$emit('update-user', this.user)
       } else {
         alert('กรุณากรอกข้อมูลให้ถูกต้อง')
       }

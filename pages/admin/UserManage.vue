@@ -58,6 +58,7 @@ export default {
   methods: {
     editUser(user) {
       this.$store.commit('user/setEditingUser', user)
+      this.$router.replace('/admin/EditUser')
     },
   },
 }
