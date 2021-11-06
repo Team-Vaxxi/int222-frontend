@@ -26,12 +26,11 @@ export default {
   methods: {
     async editUser(user) {
         const idUser = user.idUser
-        delete user.idUser
-        delete user.location
-        delete user.vaccine
-        console.log(user);
-        console.log(idUser);
-      await this.$axios.$put(`/users/${idUser}`, user).then(
+        const editingUser = user
+        delete editingUser.idUser
+        delete editingUser.location
+        delete editingUser.vaccine
+      await this.$axios.$put(`/users/${idUser}`, editingUser).then(
         (response) => {
           alert('แก้ไขข้อมูลผู้ใช้สำเร็จ')
           this.$router.replace('/admin/UserManage')
