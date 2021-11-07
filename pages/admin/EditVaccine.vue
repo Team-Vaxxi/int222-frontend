@@ -29,7 +29,7 @@ export default {
       await this.$axios.$put(`/vaccines/${vaccine.idVaccine}`, formData).then(
         (response) => {
           alert('Upload succeeded!')
-          this.$router.replace("/")
+          this.$router.replace("/admin/ShowVaccine")
         },
         (error) => {
           alert(error.response.data.error)
