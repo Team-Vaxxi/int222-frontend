@@ -15,14 +15,14 @@
             <!-- vaccine name  and price -->
             <div class="flex mt-5">
               <div class="flex-auto self-center">
-                <h1 class="text-6xl md:text-7xl font-extrabold">
+                <h1 class="text-5xl md:text-5xl font-extrabold">
                   {{ vaccine.name }}
                 </h1>
               </div>
               <div class="flex-initial self-center">
                 <div class="text-lg md:text-xl">ราคา</div>
                 <div class="mb-5">
-                  <p class="text-4xl md:text-5xl">฿{{ vaccine.price }}</p>
+                  <p class="text-3xl md:text-4xl">฿{{ vaccine.price }}</p>
                 </div>
               </div>
             </div>

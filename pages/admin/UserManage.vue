@@ -35,6 +35,22 @@
             >
               แก้ไข
             </button>
+            <button
+              class="
+                bg-red-500
+                p-2
+                rounded-xl
+                text-white
+                md:ml-0
+                w-16
+                md:w-auto
+                hover:text-black
+                flex-initial
+              "
+              @click="deleteUser(user.idUser)"
+            >
+              ลบ
+            </button>
           </div>
         </div>
       </bg-card>
@@ -60,6 +76,21 @@ export default {
       this.$store.commit('user/setEditingUser', user)
       this.$router.replace('/admin/EditUser')
     },
+    async deleteUser(userId){
+      const del = confirm('Are you sure?')
+      if(del) {
+        await this.$axios.$delete(`/users/${userId}`).then(
+          (response) => {
+            alert('Delete succeeded!')
+            window.location.reload()
+          },
+          (error) => {
+            alert(error.response.data.error)
+          }
+        )
+      }
+      
+    }
   },
 }
 </script>
