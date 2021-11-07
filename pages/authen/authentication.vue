@@ -232,7 +232,7 @@ export default {
           window.location.reload()
         },
         (error) => {
-          alert(error.response.data.error)
+          alert(error)
         }
       )
     },

@@ -434,8 +434,12 @@ export default {
   layout: 'user',
   data() {
     return {
-      user: this.$auth.user,
+      user: Object,
     }
+  },
+  async created() {
+    await this.$auth.fetchUser()
+    this.user = { ...this.$auth.user }
   },
   methods: {
     async logout() {

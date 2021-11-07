@@ -186,8 +186,6 @@ export default {
   },
   created() {
     this.user = this.userProp
-    this.user.password = null
-    this.user.confirmPassword = null
     this.validateGender()
   },
   methods: {

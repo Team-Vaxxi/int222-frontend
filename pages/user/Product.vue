@@ -78,7 +78,9 @@
                   bg-indigo-600
                   hover:bg-indigo-700
                   focus:outline-none
-                  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+                  focus:ring-2
+                  focus:ring-offset-2
+                  focus:ring-indigo-500
                 "
               >
                 <span class="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -105,10 +107,11 @@
                     text-indigo-600
                     bg-white
                     border-indigo-700
-                    hover:bg-indigo-700
-                    hover:text-white
+                    hover:bg-indigo-700 hover:text-white
                     focus:outline-none
-                    focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+                    focus:ring-2
+                    focus:ring-offset-2
+                    focus:ring-indigo-500
                     mt-2
                   "
                 >
@@ -134,7 +137,7 @@ export default {
   layout: 'user',
   data() {
     return {
-      user: this.$auth.user,
+      user: Object,
       selectedLocation: null,
       vaccine: this.$store.state.vaccine.vaccine,
       imageURL: `${process.env.BACKEND_URL}/vaccines/images`,
@@ -142,6 +145,8 @@ export default {
   },
   created() {
     this.vaccine = this.$store.state.vaccine.vaccine
+    this.user = { ...this.$auth.user }
+    this.user.password = null
   },
   methods: {
     getImage(imageName) {
@@ -152,13 +157,18 @@ export default {
         if (this.selectedLocation === null) {
           alert('Please select the location')
         } else {
-          this.user.password = null
-          this.user.vaccine = this.vaccine.idVaccine
-          this.user.location = this.selectedLocation
-          this.user.isOrder = "1"
-          await this.$axios.$put(`/users/${this.user.idUser}`, this.user).then(
+          const tempUser = this.user
+          tempUser.vaccine = this.vaccine.idVaccine
+          tempUser.location = this.selectedLocation
+          tempUser.isOrder = '1'
+          await this.$axios.$put(`/users/add/${this.user.idUser}`, tempUser).then(
             (response) => {
+              this.user.vaccine = tempUser.vaccine
+              this.user.location = tempUser.location
+              this.user.isOrder = tempUser.isOrder
+              this.$auth.setUser(this.user)
               alert('Vaccine has been ordered!')
+              this.$router.replace('/user/personal')
             },
             (error) => {
               alert(error.response.data.error)

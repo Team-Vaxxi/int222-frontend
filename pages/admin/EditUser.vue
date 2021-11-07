@@ -20,16 +20,19 @@ export default {
   layout: 'admin',
   computed: {
     editingUser() {
-      return this.$store.state.user.user
-    }
+      const editingUser = this.$store.state.user.user
+      editingUser.password = null
+      editingUser.confirmPassword = null
+      return editingUser
+    },
   },
   methods: {
     async editUser(user) {
-        const idUser = user.idUser
-        const editingUser = user
-        delete editingUser.idUser
-        delete editingUser.location
-        delete editingUser.vaccine
+      const idUser = user.idUser
+      const editingUser = user
+      delete editingUser.idUser
+      delete editingUser.location
+      delete editingUser.vaccine
       await this.$axios.$put(`/users/${idUser}`, editingUser).then(
         (response) => {
           alert('แก้ไขข้อมูลผู้ใช้สำเร็จ')
