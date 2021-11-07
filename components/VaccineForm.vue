@@ -26,7 +26,6 @@
               opacity-100
               hover:shadow-xl
               placeholder-transparent
-              w-full
             "
           />
         </div>
@@ -302,20 +301,20 @@ h1 {
     height: auto;
   }
   .text {
-    margin-left: 16%;
-    padding: 2%;
-    width: 70%;
-  }
-  #vaccine-price {
-    margin-left: 14%;
+    margin-left: 13%;
     padding: 2%;
     width: 70%;
   }
   .textarea {
+    margin-left: 2%;
     width: 70%;
     padding: 2%;
-    margin-left: 5%;
     height: 12vw;
+  }
+  #vaccine-price {
+    margin-left: 10%;
+    padding: 2%;
+    width: 70%;
   }
 }
 @media (min-width: 1024px) {
@@ -328,18 +327,19 @@ h1 {
   }
   .text {
     padding: 2%;
-    margin-left: 13%;
-  }
-  #vaccine-price {
-    margin-left: 10%;
-    padding: 2%;
-    width: 70%;
+    margin-left: 12%;
   }
   .textarea {
     padding: 2%;
     margin-left: 1%;
     height: 12vw;
   }
+  #vaccine-price {
+    margin-left: 10%;
+    padding: 2%;
+    width: 70%;
+  }
+  
 }
 
 @media (min-width: 1440px) {
