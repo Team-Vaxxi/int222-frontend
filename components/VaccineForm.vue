@@ -6,7 +6,7 @@
         @submit.prevent="validateForm"
       >
         <h1 class="text-center font-extrabold text-xl p-2">
-          เพิ่มประเภทวัคซีน
+          {{ header }}
         </h1>
 
         <!-- name -->
@@ -26,7 +26,6 @@
               opacity-100
               hover:shadow-xl
               placeholder-transparent
-              w-full
             "
           />
         </div>
@@ -46,10 +45,10 @@
             class="textarea hover:shadow-xl w-full placeholder-transparent"
           />
         </div>
-        
+
         <!-- Price -->
         <div class="flex flex-col md:flex-row p-1">
-          <label for="vaccine-name" class="vacname font-semibold"
+          <label for="vaccine-price" class="vacname font-semibold"
             >ราคาวัคซีน</label
           >
           <input
@@ -77,18 +76,18 @@
             </span>
             <div
               v-for="location in tempLocations"
-              v-bind:key="location.idLocation"
+              :key="location.idLocation"
               class="grid-place md:grid grid-cols-2"
             >
               <div class="w-auto choice-container">
                 <input
                   :id="location.name.toLowerCase()"
                   :checked="locationIsChecked(location)"
-                  @click="locationHandler(location.idLocation)"
                   type="checkbox"
                   name="location"
                   :value="location.name.toLowerCase()"
                   class="check-with-label"
+                  @click="locationHandler(location.idLocation)"
                 />
                 <label for="SCG-Bangsue" class="label-checkbox">{{
                   location.name
@@ -97,15 +96,14 @@
             </div>
           </div>
         </div>
-        
 
-        <!-- Old IMAGE Form -->
+        <!-- Image -->
         <div class="image-upload">
           <center>
             <label for="vaccine-img" class="pic-label w-min bg-gray-600">
               <img
                 id="upload-pic"
-                src="../static/image-upload.jpg"
+                :src="imageUpload"
                 class="hover:shadow-2xl"
               />
             </label>
@@ -114,6 +112,7 @@
               type="file"
               name="vaccine-img"
               accept="image/*"
+              @change="imageHandler"
             />
             <!-- @change="imageHandler" -->
           </center>
@@ -133,22 +132,21 @@
 import BgCard from './BgCard.vue'
 export default {
   components: { BgCard },
+  props: ['header', 'vaccineProp', 'imageUpload'],
   data() {
     return {
       vaccine: Object,
       vaccineValidate: false,
       tempLocations: [],
-
-      vaccinetImageFile: null,
-      currentImage: null,
-      
-      
+      vaccineImageFile: null,
     }
   },
-  props: {
-    vaccineProp: Object,
+  async created() {
+    this.vaccine = this.vaccineProp
+    this.tempLocations = await this.$axios.$get(`/locations`)
+    // structure of object
+    // console.log(this.vaccine)
   },
-
   methods: {
     validateForm() {
       this.vaccineValidate = false
@@ -160,15 +158,15 @@ export default {
         this.vaccineValidate = true
         alert('กรุณากรอกรายละเอียดวัคซีน')
       }
-      // if (this.vaccine.image === null) {
-      //   this.vaccineValidate = true
-      //   alert('กรุณาอัปโหลดไฟล์ภาพวัคซีน')
-      // }
+      if (this.vaccine.image === null) {
+        this.vaccineValidate = true
+        alert('กรุณาอัปโหลดไฟล์ภาพวัคซีน')
+      }
       if (this.vaccine.price === 0 || this.vaccine.price === null) {
         this.vaccineValidate = true
         alert('กรุณากรอกราคาวัคซีน')
       }
-      if (this.vaccine.location.length === 0) {
+      if (this.vaccine.locations.length === 0) {
         this.vaccineValidate = true
         alert('กรุณาเลือกสถานที่ให้บริการวัคซีน')
       }
@@ -176,55 +174,50 @@ export default {
         this.submitForm()
       }
     },
-  
+
     submitForm() {
-    console.log('method: submitForm');
-    this.$emit(
-      "submit-form",
-      this.vaccine
-    )
+      // console.log('method: submitForm')
+      this.$emit('submit-form', this.vaccine, this.vaccineImageFile)
+    },
+
+    imageHandler(event) {
+      const input = event.target.files[0]
+      this.vaccineImageFile = input
     },
 
     locationHandler(selectLocationID) {
-      const locationIsExist = this.vaccine.location.filter(function (e) {
-        return e.idLocation === selectLocationID;
-      });
-      for (let index = 0; index < this.vaccine.location.length; index++) {
-        if (this.vaccine.location[index] === locationIsExist[0]) {
-          this.vaccine.location.splice(index, 1);
+      const locationIsExist = this.vaccine.locations.filter(function (e) {
+        return e.idLocation === selectLocationID
+      })
+      for (let index = 0; index < this.vaccine.locations.length; index++) {
+        if (this.vaccine.locations[index] === locationIsExist[0]) {
+          this.vaccine.locations.splice(index, 1)
         }
       }
       if (locationIsExist.length === 0) {
         const index = this.tempLocations
           .map(function (e) {
-            return e.idLocation;
+            return e.idLocation
           })
-          .indexOf(selectLocationID);
-        this.vaccine.location.push({
+          .indexOf(selectLocationID)
+        this.vaccine.locations.push({
           idLocation: this.tempLocations[index].idLocation,
           name: this.tempLocations[index].name,
-        });
+        })
       }
     },
 
     locationIsChecked(location) {
-      const selected = this.vaccine.location.filter(
+      const selected = this.vaccine.locations.filter(
         (item) => item.idLocation === location.idLocation
-      );
+      )
       if (selected.length > 0) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
-    }
-
+    },
   },
-  async created() {
-    this.vaccine = this.vaccineProp
-    this.tempLocations = await this.$axios.$get(`/locations`)
-    // structure of object
-    console.log(this.vaccine);
-  }
 }
 </script>
 
@@ -308,20 +301,20 @@ h1 {
     height: auto;
   }
   .text {
-    margin-left: 16%;
-    padding: 2%;
-    width: 70%;
-  }
-  #vaccine-price {
-    margin-left: 14%;
+    margin-left: 13%;
     padding: 2%;
     width: 70%;
   }
   .textarea {
+    margin-left: 2%;
     width: 70%;
     padding: 2%;
-    margin-left: 5%;
     height: 12vw;
+  }
+  #vaccine-price {
+    margin-left: 10%;
+    padding: 2%;
+    width: 70%;
   }
 }
 @media (min-width: 1024px) {
@@ -334,18 +327,19 @@ h1 {
   }
   .text {
     padding: 2%;
-    margin-left: 13%;
-  }
-  #vaccine-price {
-    margin-left: 10%;
-    padding: 2%;
-    width: 70%;
+    margin-left: 12%;
   }
   .textarea {
     padding: 2%;
     margin-left: 1%;
     height: 12vw;
   }
+  #vaccine-price {
+    margin-left: 10%;
+    padding: 2%;
+    width: 70%;
+  }
+  
 }
 
 @media (min-width: 1440px) {

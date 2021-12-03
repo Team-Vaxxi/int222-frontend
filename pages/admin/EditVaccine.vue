@@ -1,9 +1,9 @@
 <template>
   <vaccine-form
-    header="เพิ่มประเภทวัคซีน"
-    :vaccine-prop="addingVaccine"
+    header="แก้ไขประเภทวัคซีน"
+    :vaccine-prop="editingVaccine"
     :image-upload="imageUpload"
-    @submit-form="addVaccine"
+    @submit-form="editVaccine"
   />
 </template>
 
@@ -12,25 +12,21 @@ import VaccineForm from '../../components/VaccineForm.vue'
 export default {
   components: { VaccineForm },
   layout: 'admin',
-  data() {
-    return {
-      imageUpload: '/image-upload.jpg',
-      addingVaccine: {
-        name: '',
-        description: '',
-        price: 0,
-        image: '',
-        locations: [],
-      },
+  computed: {
+    editingVaccine() {
+      return this.$store.state.vaccine.vaccine
+    },
+    imageUpload() {
+      return this.$store.state.vaccine.imageURL
     }
   },
   methods: {
-    async addVaccine(vaccine, vaccineImageFile) {
+    async editVaccine(vaccine, vaccineImageFile) {
       const formData = new FormData()
       formData.append('vaccine', JSON.stringify(vaccine))
-      // console.log(JSON.stringify(vaccine))
+      //   console.log(JSON.stringify(vaccine))
       formData.append('image', vaccineImageFile)
-      await this.$axios.$post(`/vaccines`, formData).then(
+      await this.$axios.$put(`/vaccines/${vaccine.idVaccine}`, formData).then(
         (response) => {
           alert('Upload succeeded!')
           this.$router.replace("/admin/ShowVaccine")

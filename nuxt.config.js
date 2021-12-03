@@ -25,6 +25,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/persistedState.client.js' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -44,13 +45,30 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
   ],
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'auth/login', method: 'post', propertyName: 'access_token' },
+          user: { url: 'auth/me', method: 'get', propertyName: 'user' },
+          logout: false
+        }
+      }
+    },
+    redirect: {
+      login: '/authen/authentication'
+    }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // created env.
     // `http://${...}/`
-    baseURL: `http://${process.env.BACKEND_URL}/`
+    baseURL: `${process.env.BACKEND_URL}`,
+    withCredentials: true
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -1,11 +1,14 @@
 <template>
   <div>
-    <admin-navbar />
-    <Nuxt />
+    <default-navbar></default-navbar>
+    <authentication></authentication>
   </div>
 </template>
-<style>
-body{
-   font-family: 'Prompt', sans-serif;
+<script>
+import DefaultNavbar from '~/components/DefaultNavbar.vue'
+import authentication from '~/pages/authen/authentication.vue'
+export default {
+  components: { authentication },
+  component: { DefaultNavbar}
 }
-</style>
+</script>
