@@ -242,8 +242,9 @@ export default {
       }
 
       if (userInvalid === false) {
-        delete this.user.confirmPassword
-        this.$emit('update-user', this.user)
+        const userpayload = this.user
+        delete userpayload.confirmPassword
+        this.$emit('update-user', userpayload)
       } else {
         alert('กรุณากรอกข้อมูลให้ถูกต้อง')
       }
